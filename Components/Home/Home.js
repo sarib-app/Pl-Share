@@ -45,6 +45,7 @@ import Sorry from '../Modals/SorryModal';
 // import { BannerAd, BannerAdSize, TestIds,InterstitialAd,AdEventType } from 'react-native-google-mobile-ads';
 import { useIsFocused } from '@react-navigation/native';
 import Suspended from '../Modals/Suspended';
+import GlobalStyles from '../GlobalStyles/GlobalStyles';
 // const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-7224745157985009/9676971080';
 // const adUnitIdPopUp = __DEV__ ? TestIds.APP_OPEN  : 'ca-app-pub-7224745157985009/6687446284';
 
@@ -204,15 +205,14 @@ onPress={()=> {
 }}
 style={styles.iconWrapper}>
 <LinearGradient 
- colors={[Colors.GoldII, Colors.GoldI]}
+ colors={[Colors.bgIv, Colors.bgIv]}
  start={start} end={end}     
 style={styles.CatIcon}>
 
 
 <Image 
 source={RechargeIcon}
-style={{width:20,height:30}}
-
+style={{width:20,height:30,tintColor:Colors.FontColorI}}
 />
 
 
@@ -246,14 +246,14 @@ onPress={() => {
 }}
 style={styles.iconWrapper}>
 <LinearGradient 
- colors={[Colors.GoldII, Colors.GoldI]}
+ colors={[Colors.bgIv, Colors.bgIv]}
  start={start} end={end}     
 style={styles.CatIcon}>
 
 
 <Image 
 source={withdrawIcon}
-style={{width:27,height:27}}
+style={{width:27,height:27,tintColor:Colors.FontColorI}}
 
 />
 
@@ -272,14 +272,14 @@ style={{width:27,height:27}}
 onPress={()=> navigation.navigate("PlanDecider")}
 style={styles.iconWrapper}>
 <LinearGradient 
- colors={[Colors.GoldII, Colors.GoldI]}
+ colors={[Colors.bgIv, Colors.bgIv]}
  start={start} end={end}     
 style={styles.CatIcon}>
 
 
 <Image 
 source={plansIcon}
-style={{width:27,height:27}}
+style={{width:27,height:27,tintColor:Colors.FontColorI}}
 
 />
 
@@ -297,14 +297,14 @@ style={{width:27,height:27}}
 onPress={()=> navigation.navigate('Decider')}
 style={styles.iconWrapper}>
 <LinearGradient 
- colors={[Colors.GoldII, Colors.GoldI]}
+ colors={[Colors.bgIv, Colors.bgIv]}
  start={start} end={end}     
 style={styles.CatIcon}>
 
 
 <Image 
 source={helpIcon}
-style={{width:27,height:27}}
+style={{width:27,height:27,tintColor:Colors.FontColorI}}
 
 />
 
@@ -322,14 +322,14 @@ style={{width:27,height:27}}
 onPress={()=> setShowComingSoon(true)}
 style={styles.iconWrapper}>
 <LinearGradient 
- colors={[Colors.GoldII, Colors.GoldI]}
+ colors={[Colors.bgIv, Colors.bgIv]}
  start={start} end={end}     
 style={styles.CatIcon}>
 
 
 <Image 
 source={jobsIcon}
-style={{width:28,height:23}}
+style={{width:28,height:23,tintColor:Colors.FontColorI}}
 
 />
 
@@ -347,14 +347,14 @@ onPress={()=> setShowComingSoon(true)}
 
 style={styles.iconWrapper}>
 <LinearGradient 
- colors={[Colors.GoldII, Colors.GoldI]}
+ colors={[Colors.bgIv, Colors.bgIv]}
  start={start} end={end}     
 style={styles.CatIcon}>
 
 
 <Image 
 source={gameIcon}
-style={{width:30,height:24}}
+style={{width:30,height:24,tintColor:Colors.FontColorI}}
 
 />
 
@@ -371,14 +371,14 @@ onPress={()=> setShowComingSoon(true)}
 
 style={styles.iconWrapper}>
 <LinearGradient 
- colors={[Colors.GoldII, Colors.GoldI]}
+ colors={[Colors.bgIv, Colors.bgIv]}
  start={start} end={end}     
 style={styles.CatIcon}>
 
 
 <Image 
 source={shopIcon}
-style={{width:29,height:25}}
+style={{width:29,height:25,tintColor:Colors.FontColorI}}
 
 />
 
@@ -395,14 +395,14 @@ onPress={()=> setShowComingSoon(true)}
 
 style={styles.iconWrapper}>
 <LinearGradient 
- colors={[Colors.GoldII, Colors.GoldI]}
+ colors={[Colors.bgIv, Colors.bgIv]}
  start={start} end={end}     
 style={styles.CatIcon}>
 
 
 <Image 
 source={tradeIcon}
-style={{width:31,height:22}}
+style={{width:31,height:22,tintColor:Colors.FontColorI}}
 
 />
 
@@ -423,14 +423,14 @@ onPress={()=> setShowComingSoon(true)}
 
 style={styles.iconWrapper}>
 <LinearGradient 
- colors={[Colors.GoldII, Colors.GoldI]}
+ colors={[Colors.bgIv, Colors.bgIv]}
  start={start} end={end}     
 style={styles.CatIcon}>
 
 
 <Image 
 source={nftIcon}
-style={{width:30,height:28}}
+style={{width:30,height:28,tintColor:Colors.FontColorI}}
 
 />
 
@@ -441,10 +441,10 @@ style={{width:30,height:28}}
 </ScrollView>
 </View>
 
-<Coming_Soon 
+{/* <Coming_Soon 
 IsVisible={showComingSoon}
 onHideModal={onHideComingsoon}
-/>
+/> */}
 </View>
 
   )
@@ -456,7 +456,7 @@ onHideModal={onHideComingsoon}
 const Investor =({item}) =>(
 <View style={styles.ProfileWrapper}>
 <Image source={item.image} style={{width:60,height:60}} />
-<Text style={{color:Colors.BgColor}}>{item.name}</Text>
+<Text style={{color:Colors.FontColorI}}>{item.name}</Text>
 </View>
 )
 
@@ -479,19 +479,19 @@ function LowerCart(){
   
   
   <Image 
-  style={{width:49,height:49}} 
+  style={{width:49,height:49,tintColor:Colors.PrimaryColor}} 
   source={TipsIcon}
   />
   
   <View style={styles.InnerTricks}>
-  <Text style={{fontWeight:'bold',fontSize:18,color:Colors.BgColor}}>{item.title}</Text>
+  <Text style={{fontWeight:'bold',fontSize:18,color:Colors.FontColorI}}>{item.title}</Text>
   {/* <Text>please see the video.. below.......</Text> */}
   
   </View>
   <TouchableOpacity onPress={()=> setIsOpen((p)=>!p)}>
   <Image 
   source={DropDwn}
-  style={{width:18,height:15}}
+  style={{width:18,height:15,tintColor:Colors.PrimaryColor}}
   />
   </TouchableOpacity>
   
@@ -571,6 +571,8 @@ data.map((item)=>{
   return (
     <SafeAreaView style={styles.Container}>
 
+<View style={GlobalStyles.HeaderWrapper}>
+
 
 <View style={styles.Header}>
     <Text style={styles.OuterTxt}>Weclcome{'\n'} <Text style={styles.InnerTxt}>{username}<Text style={{color:Colors.placeHolder,fontSize:14}}>  {`( ${refer} )`}</Text></Text></Text>
@@ -627,7 +629,7 @@ newNotif === "1" &&
   </View>
 
 </View>
-
+</View>
 <View style={{alignItems:"center"}}>
 
 
@@ -646,24 +648,17 @@ newNotif === "1" &&
 >
 
 
+<View style={GlobalStyles.BgCart}>
+
 
 
 
 
 <UpperCart/>
-{/* <Pressable
-onPress={()=> navigation.navigate("PromotionScreen")}
-
-style={{backgroundColor:"red"}}
->
-<Text style={{color:"white",fontWeight:"bold",fontSize:18,margin:10,alignSelf:"center"}}>
-  Kindly Collect Your 500 Rupees Now
-</Text>
-  
-</Pressable> */}
 
 
-   {
+</View>
+   {/* {
     isPromotion === "0"&&
     <Pressable
 onPress={()=>{
@@ -691,7 +686,7 @@ style={{ width:320,
 />
 </Pressable>
 
-}
+} */}
 
 <LowerCart/>
 

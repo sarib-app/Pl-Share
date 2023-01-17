@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     BottomBar:{
         width:WindowWidth/1.1,
         height:WindowHeight/11.5,
-        backgroundColor:Colors.BgColorII,
+        backgroundColor:Colors.BgColor,
         borderRadius:40,
         position:'absolute',
         bottom:20,
