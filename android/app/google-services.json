@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "9886210252",
+    "project_id": "plshare-b4682",
+    "storage_bucket": "plshare-b4682.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9886210252:android:dd3e8a3727de74abc18a69",
+        "android_client_info": {
+          "package_name": "com.plshare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "9886210252-nqmt9v6lmmolp8esqpvncde2846rtcmj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7REVIMoJNL8H4vDGDbHv1taye_w8EaF4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "9886210252-nqmt9v6lmmolp8esqpvncde2846rtcmj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
