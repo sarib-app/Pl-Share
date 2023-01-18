@@ -105,6 +105,15 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         fontSize: 18
     },
+
+   PromotionTitleTxt:{
+    color: Colors.send,
+    fontWeight: 'bold',
+    marginLeft: 5,
+    // marginBottom: 10,
+    fontSize: 18
+   },
+
     lowerProfilesCart: {
         width: WindowWidth / 1.15,
         // height:20,
@@ -120,7 +129,7 @@ const styles = StyleSheet.create({
     TrickContainer:{
         width:WindowWidth/1.1,
         // height:20,
-        borderRadius:20,
+        borderRadius:8,
         // borderWidth:0.5,
         borderColor:Colors.PrimaryColor,
         alignSelf:"center",

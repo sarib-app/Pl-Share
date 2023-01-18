@@ -22,7 +22,7 @@ import credited from '../../assets/icons/credited.png'
 import debited from '../../assets/icons/debited.png'
 
 import LinearGradient from 'react-native-linear-gradient';
-
+import GlobalStyles from '../GlobalStyles/GlobalStyles';
 import {DepositTransaction,TeamsComission,DailyIncomeData} from '../data/TopInvestors';
 import DailyIncome from '../../assets/icons/DailyIncome.png'
 import TeamComission from '../../assets/icons/TeamComission.png'
@@ -525,7 +525,7 @@ data.map((item)=>{
   return (
     <SafeAreaView style={styles.Container}>
 
-
+<View style={GlobalStyles.HeaderWrapper}>
 <View style={styles.Header}>
     <Text style={styles.OuterTxt}>Weclcome To{'\n'} <Text style={styles.InnerTxt}>Daily Transaction</Text></Text>
 
@@ -543,6 +543,7 @@ data.map((item)=>{
 
 
 
+</View>
 </View>
 {/* <BannerAd
       unitId={adUnitId}
@@ -564,8 +565,10 @@ data.map((item)=>{
       />
     }
 >
+  
+<View style={GlobalStyles.BgCart}>
 <UpperCart/>
-
+</View>
 <LowerCart/>
 
 </ScrollView>

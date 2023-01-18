@@ -7,6 +7,7 @@ import {
 ScrollView,
 Pressable,
 TouchableOpacity,
+Dimensions
 
  
 } from 'react-native';
@@ -49,19 +50,20 @@ import GlobalStyles from '../GlobalStyles/GlobalStyles';
 // const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-7224745157985009/9676971080';
 // const adUnitIdPopUp = __DEV__ ? TestIds.APP_OPEN  : 'ca-app-pub-7224745157985009/6687446284';
 
-
+import { LineChart } from 'react-native-gifted-charts';
 
 // const interstitial = InterstitialAd.createForAdRequest(adUnitIdPopUp, {
 //   requestNonPersonalizedAdsOnly: true,
 //   keywords: ['fashion', 'clothing','trading'],
 // });
 
-
+const WindowWidth = Dimensions.get('window').width
+const WindowHeight = Dimensions.get('window').height
 
 
 function Home({data,total_Record}) {
 const [username,setUsername]=useState("username")
-const [isPromotion,setIspromotion]=useState("0")
+const [isPromotion,setIspromotion]=useState("1")
 const [refer,setRefer]=useState("N/A")
 const [newNotifCount,setNewNotifCount]=useState("0")
 const [SuspendedMessage,setSuspendedMessage]=useState("hello there")
@@ -71,7 +73,6 @@ const focused = useIsFocused()
 
 
 const [loaded, setLoaded] = useState(false);
-
 
 
 
@@ -170,7 +171,7 @@ setShowComingSoon((P)=> !P)
   return(
 
 
-<View style={[styles.UpperCart,{marginBottom:isPromotion === "0" ? 0 :25}]}>
+<View style={[styles.UpperCart,{marginBottom:isPromotion != "0" ? 25 :0}]}>
 <Text style={styles.balanceTitle}>Total Balance</Text>
 <Text style={styles.BalanceTxt}>PKR {totalBalance.toFixed(2)}</Text>
 
@@ -456,7 +457,7 @@ onHideModal={onHideComingsoon}
 const Investor =({item}) =>(
 <View style={styles.ProfileWrapper}>
 <Image source={item.image} style={{width:60,height:60}} />
-<Text style={{color:Colors.FontColorI}}>{item.name}</Text>
+<Text style={{color:Colors.PrimaryColor}}>{item.name}</Text>
 </View>
 )
 
@@ -479,8 +480,8 @@ function LowerCart(){
   
   
   <Image 
-  style={{width:49,height:49,tintColor:Colors.PrimaryColor}} 
-  source={TipsIcon}
+  style={{width:49,height:49}} 
+  source={{uri:"https://img.icons8.com/external-xnimrodx-lineal-color-xnimrodx/64/null/external-video-art-and-design-studio-xnimrodx-lineal-color-xnimrodx.png"}}
   />
   
   <View style={styles.InnerTricks}>
@@ -499,7 +500,7 @@ function LowerCart(){
   {
     isOpen === true &&
     <>
-  <Text style={{textAlign:'center',marginTop:10,color:Colors.bgIII}}> 
+  <Text style={{textAlign:'center',marginTop:10,color:Colors.FontColorII}}> 
   {item.body}
   </Text>
   <WebView 
@@ -523,8 +524,21 @@ function LowerCart(){
 return(
   <View style={styles.LowerCart}>
   
-  <Text style={styles.L_Cart_Title}>Top Investors</Text>
-  
+  <Text style={styles.L_Cart_Title}>Promotion</Text>
+
+  <View style={{backgroundColor: Colors.bgIv,alignSelf:'center',width:WindowWidth/1.1,borderRadius:8,shadowColor:Colors.BgColor,elevation:10,alignItems:"center",height:WindowHeight/8,flexDirection:'row'}}>
+       
+  <Image source={{uri:"https://img.icons8.com/arcade/64/null/packaging.png"}} style={{width:50,height:50,marginLeft:10}}/>
+  <View >
+  <Text style={styles.PromotionTitleTxt}>Congratulations!</Text>
+<Text style={{textAlign:'left',marginLeft:10,color:Colors.FontColorII}}>
+You have sucessfully recieved 2$ {'\n'} as your registration reward ! {'\n'}
+Now click here and claim more free 5$ 
+</Text>
+  </View>
+      </View>
+
+{/*   
   <View style={styles.lowerProfilesCart}>
 
 <FlatList 
@@ -535,9 +549,9 @@ showsHorizontalScrollIndicator={false}
 scrollEnabled={true}
 />
 
-</View>
+</View> */}
 
-<Text style={[styles.L_Cart_Title,{marginTop:0}]}>Tips & Tricks</Text>
+<Text style={[styles.L_Cart_Title,{marginTop:10}]}>Tips & Tricks</Text>
 
 <ScrollView
 showsVerticalScrollIndicator={false}
