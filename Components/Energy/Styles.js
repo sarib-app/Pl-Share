@@ -23,13 +23,13 @@ const styles = StyleSheet.create({
     InnerTxt: { fontWeight: 'bold', fontSize: 20 },
     OuterTxt: { color: Colors.FontColorI, textAlign: "left" },
     UpperCart: {
-        width: WindowWidth / 1.15,
-        padding: 15,
+        width: WindowWidth ,
+        // padding: 15,
         // height:WindowHeight/3,
         borderRadius: 30,
-        backgroundColor: Colors.BgColorII,
+        // backgroundColor: Colors.BgColorII,
         borderColor: Colors.PrimaryColor,
-        borderWidth: 1,
+        // borderWidth: 1,
         alignItems: 'center',
         margin: 25
     },

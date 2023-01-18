@@ -15,11 +15,26 @@ import Colors from './Color';
       alignItems:"center",
       justifyContent:"center"
     },
+    HeaderWrapper:{
+      width:WindowWidth,
+      height:WindowHeight/12,
+      backgroundColor:Colors.BgColor,
+      alignItems:"center",
+      justifyContent:"center"
+    },
+    BgCart:{
+     width:WindowWidth,
+     borderBottomLeftRadius:40,
+     borderBottomRightRadius:40,
+     padding:10,
+     backgroundColor:Colors.BgColor,
+     alignItems:"center"
+
+    },
     HeaderText:{
         color:Colors.BgColor,
         fontWeight:"bold",
         fontSize:22,
-        
     },
     PorfilePic:{
         borderRadius:1000,

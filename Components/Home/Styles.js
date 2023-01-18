@@ -10,8 +10,7 @@ const styles = StyleSheet.create({
     Container: {
         width: WindowWidth,
         height: WindowHeight,
-        // backgroundColor: Colors.BgColor,
-        backgroundColor: "#0D0B0D",
+        backgroundColor: Colors.BgColorII,
 
         alignItems: "center",
 
@@ -31,17 +30,21 @@ const styles = StyleSheet.create({
     InnerTxt: { fontWeight: 'bold', fontSize: 20 },
     OuterTxt: { color: Colors.FontColorI, textAlign: "left" },
     UpperCart: {
-        width: WindowWidth / 1.15,
-        padding: 15,
+        width: WindowWidth ,
+        // padding: 15,
         // height:WindowHeight/3,
         borderRadius: 30,
-        backgroundColor: Colors.BgColorII,
+        // backgroundColor: Colors.BgColorII,
         borderColor: Colors.PrimaryColor,
-        borderWidth: 1,
+        // borderWidth: 1,
         alignItems: 'center',
         margin: 25
     },
-    balanceTitle: { color: Colors.lightTxt },
+    balanceTitle: {  
+    
+        color: Colors.lightTxt 
+
+    },
     BalanceTxt: {
         color: Colors.FontColorI,
         fontWeight: 'bold',
@@ -66,16 +69,16 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     CatIcon: {
-        width: 50,
-        height: 50,
-        borderRadius: 15,
+        width: 60,
+        height: 60,
+        borderRadius: 6,
         alignItems: 'center',
         justifyContent: 'center',
         // marginLeft:10,
         backgroundColor: 'red'
     },
     catSection: {
-        width: WindowWidth / 1.27,
+        width: WindowWidth / 1.15,
         height: 0,
         flexDirection: 'row',
         marginTop:5
@@ -91,18 +94,26 @@ const styles = StyleSheet.create({
         height: WindowHeight / 1.1,
 
 
-        backgroundColor: Colors.FontColorI,
-        borderRadius: 40,
-        borderWidth: 1,
+        backgroundColor: Colors.BgColorII,
+  
         borderColor: Colors.PrimaryColor,
     },
     L_Cart_Title: {
-        color: Colors.BgColor,
+        color: Colors.FontColorI,
         fontWeight: 'bold',
         margin: 25,
         marginBottom: 10,
         fontSize: 18
     },
+
+   PromotionTitleTxt:{
+    color: Colors.send,
+    fontWeight: 'bold',
+    marginLeft: 5,
+    // marginBottom: 10,
+    fontSize: 18
+   },
+
     lowerProfilesCart: {
         width: WindowWidth / 1.15,
         // height:20,
@@ -118,15 +129,15 @@ const styles = StyleSheet.create({
     TrickContainer:{
         width:WindowWidth/1.1,
         // height:20,
-        borderRadius:20,
-        borderWidth:0.5,
+        borderRadius:8,
+        // borderWidth:0.5,
         borderColor:Colors.PrimaryColor,
         alignSelf:"center",
         padding:15,
         shadowColor:Colors.BgColor,
         elevation:1,
         shadowRadius:4,
-        backgroundColor:Colors.FontColorI,
+        backgroundColor:Colors.bgIv ,
         marginBottom:15,
         alignItems:'center'
     },

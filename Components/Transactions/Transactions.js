@@ -21,7 +21,7 @@ import Colors from '../GlobalStyles/Color';
 import LinearGradient from 'react-native-linear-gradient';
 import credited from '../../assets/icons/credited.png'
 import debited from '../../assets/icons/debited.png'
-
+import GlobalStyles from '../GlobalStyles/GlobalStyles';
 
 
 import {TipsTricks,DepositTransaction} from '../data/TopInvestors';
@@ -99,14 +99,14 @@ onPress={()=> {
 }}
 style={styles.iconWrapper}>
 <LinearGradient 
- colors= { selected === item.name ?[Colors.GoldII, Colors.GoldI]:[Colors.FontColorI, Colors.FontColorI]}
+ colors= { selected === item.name ?[Colors.PrimaryColor, Colors.SeconderyColor]:[Colors.bgIv, Colors.bgIv]}
  start={start} end={end}     
 style={styles.CatIcon}>
 
 
 <Image 
 source={item.icon}
-style={{width:item.width,height:item.height}}
+style={{width:item.width,height:item.height,tintColor:Colors.FontColorI}}
 
 />
 
@@ -150,6 +150,8 @@ item={item}
 }
 />
 </View>
+
+
 </View>
   )
 }
@@ -192,8 +194,8 @@ function LowerCart(){
   
   
   <View style={styles.InnerTricks}>
-  <Text style={{fontWeight:'bold',fontSize:18,color:Colors.BgColor}}>{selected}</Text>
-  <Text style={{color:Colors.BgColorII}}>{ selected === "Income" ?  moment(item.earn_date).format('YYYY-MM-DD'):moment(item.created_at).format('YYYY-MM-DD')}</Text>
+  <Text style={{fontWeight:'bold',fontSize:18,color:Colors.FontColorI}}>{selected}</Text>
+  <Text style={{color:Colors.FontColorII}}>{ selected === "Income" ?  moment(item.earn_date).format('YYYY-MM-DD'):moment(item.created_at).format('YYYY-MM-DD')}</Text>
   
   </View>
   
@@ -224,13 +226,13 @@ nestedScrollEnabled={true}
 >
 { data !="" ? data.length <1 ?
 
-<Text style={{color:Colors.BgColor,fontSize:18,marginTop:40,alignSelf:"center"}}>No data found!</Text>:
+<Text style={{color:Colors.FontColorII,fontSize:18,marginTop:40,alignSelf:"center"}}>No data found!</Text>:
 data.map((item)=>{
   return(
     <TransactionList item={item} />
 
   )
-}):<Text style={{color:Colors.BgColor,fontSize:18,marginTop:40,alignSelf:"center"}}>No data found!</Text>}
+}):<Text style={{color:Colors.FontColorII,fontSize:18,marginTop:40,alignSelf:"center"}}>No data found!</Text>}
 <View style={{height:150,width:100}}>
 
 </View>
@@ -251,7 +253,7 @@ data.map((item)=>{
   return (
     <SafeAreaView style={styles.Container}>
 
-
+<View style={GlobalStyles.HeaderWrapper}>
 <View style={styles.Header}>
     <Text style={styles.OuterTxt}>Weclcome To{'\n'} <Text style={styles.InnerTxt}>Transactions</Text></Text>
     { user.pro_pic === "" || user.pro_pic === "default"?
@@ -260,9 +262,10 @@ data.map((item)=>{
       :  
       <Image source={{uri:Endpoints.ImageBaseUrl+user.pro_pic}} style={{width:50,height:50,borderRadius:1000}}/>
 
-      }</View>
+      }
+      </View>
 
-
+</View>
 
 {/* 
 <BannerAd
@@ -284,8 +287,10 @@ data.map((item)=>{
   />
 }
 >
-<UpperCart/>
+<View style={[GlobalStyles.BgCart,{padding:20}]}>
 
+<UpperCart/>
+</View>
 <LowerCart/>
 
 </ScrollView>

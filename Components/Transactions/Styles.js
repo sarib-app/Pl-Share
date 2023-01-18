@@ -10,8 +10,10 @@ const styles = StyleSheet.create({
     Container: {
         width: WindowWidth,
         height: WindowHeight,
-        backgroundColor: Colors.BgColor,
+        backgroundColor: Colors.BgColorII,
+
         alignItems: "center",
+
 
     },
     Header: {
@@ -24,14 +26,17 @@ const styles = StyleSheet.create({
     OuterTxt: { color: Colors.FontColorI, textAlign: "left" },
     UpperCart: {
         width: WindowWidth / 1.15,
-        padding: 15,
+        // padding: 15,
         // height:WindowHeight/3,
         borderRadius: 30,
-        backgroundColor: Colors.BgColorII,
+        // backgroundColor: Colors.BgColorII,
         borderColor: Colors.PrimaryColor,
-        borderWidth: 1,
+        // borderWidth: 1,
         alignItems: 'center',
-        margin: 25
+        marginBottom:25
+        // margin: 25,
+
+    
     },
     balanceTitle: { color: Colors.lightTxt },
     BalanceTxt: {
@@ -58,20 +63,20 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     CatIcon: {
-        width: 50,
-        height: 50,
-        borderRadius: 15,
+        width: 60,
+        height: 60,
+        borderRadius: 6,
         alignItems: 'center',
         justifyContent: 'center',
         // marginLeft:10,
         backgroundColor: 'red'
     },
     catSection: {
-        width: WindowWidth / 1.27,
+        width: WindowWidth / 1.15,
         flexDirection: 'row',
         alignItems:"center",
-        margin:10,
-        marginTop:15
+        // margin:10,
+        marginTop:20
         // backgroundColor:"blue",
         
         // justifyContent:'space-between'
@@ -85,13 +90,17 @@ const styles = StyleSheet.create({
         height: WindowHeight / 1.1,
 
 
-        backgroundColor: Colors.FontColorI,
-        borderRadius: 40,
-        borderWidth: 1,
-        borderColor: Colors.PrimaryColor,
+        backgroundColor: Colors.BgColorII,
+  
+       
+    
+    
+
+
+        
     },
     L_Cart_Title: {
-        color: Colors.BgColor,
+        color: Colors.FontColorI,
         fontWeight: 'bold',
         margin: 25,
         marginBottom: 10,
@@ -115,12 +124,15 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'space-between',
-        borderBottomWidth:1,
+        // borderBottomWidth:1,
         borderColor:Colors.placeHolder,
         alignSelf:"center",
         paddingTop:15,
+        marginBottom:5,
         paddingBottom:15,
-
+         backgroundColor:Colors.bgIv,
+         padding:5,
+         borderRadius:8,
         // marginBottom:15,
         alignItems:'center'
     },
@@ -140,7 +152,7 @@ const styles = StyleSheet.create({
     },
 IconWrapper:{
 
-        backgroundColor:"rgba(23, 23, 23, 0.1)",
+        backgroundColor:Colors.BgColorII,
         width:50,
         height:50,
         borderRadius:10,
