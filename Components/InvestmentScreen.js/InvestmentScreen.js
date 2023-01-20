@@ -34,6 +34,7 @@ import Endpoints from '../../EnDPoints';
 import Confirmation from './ConfirmationModal';
 import getAsync from '../GetAsynData/getAsync';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import InvestmentListMOdal from './InvestmentListMOdal';
 
 // import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
 
@@ -49,6 +50,7 @@ function InvestmentScreen({
    const asyncdata = getAsync()
   const [selected,setSelected]=useState("New") 
 
+  const [isOpenInvModal,setIsOpenInvModal]=useState(false) 
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -121,38 +123,13 @@ const onRefresh = useCallback(() => {
 
 
 
-function UpperCart(){
-
-function IconList ({item}){
-  return(
-    <TouchableOpacity 
-onPress={()=> {
-  setSelected(item.name)
-}}
-style={styles.iconWrapper}>
-<LinearGradient 
- colors= { selected === item.name ?[Colors.GoldII, Colors.GoldI]:[Colors.FontColorI, Colors.FontColorI]}
- start={start} end={end}     
-style={styles.CatIcon}>
+function ActivitySection(){
 
 
-<Image 
-source={item.icon}
-style={{width:item.width,height:item.height}}
-
-/>
-
-
-</LinearGradient>
-<Text style={{color:"white"}}>{item.name}</Text>
-</TouchableOpacity>
-
-  )
-}
 
 
   return(
-<View style={styles.UpperCart}>
+<View style={[styles.UpperCart,{marginTop:30}]}>
 <Text style={styles.balanceTitle}>Total Investment</Text>
 <Text style={styles.BalanceTxt}>PKR {total_Record !=""? total_Record.Total_investment:0}</Text>
 
@@ -161,23 +138,6 @@ style={{width:item.width,height:item.height}}
 </View>
 
 
-<View 
-style={styles.catSection}>
-
-
-<FlatList 
-showsHorizontalScrollIndicator={false}
-contentContainerStyle={{justifyContent:"space-between"}}
-horizontal
-scrollEnabled={true}
-data={InvestmentIcons}
-renderItem={({item})=>
-<IconList
-item={item}
-/>
-}
-/>
-</View>
 </View>
   )
 }
@@ -198,194 +158,75 @@ item={item}
 // const data = selected === "All"? AllPackages : AllPackages.filter((item)=>item.status === selected)
 const data =AllPackages
 function LowerCart(){
-    function InvestmentLists ({item}){
-      const [showConfirmation,setShowConfirmation]=useState(false)
-        const [isOpen ,setIsOpen]=useState(false)
-      
-function onHideModal(){
-  setShowConfirmation((p)=>!p)
-}
-
-
-
-      return(
-        <View style={styles.TrickContainer}>
-      <Pressable
-      onPress={()=> setIsOpen((p)=>!p)}
-      style={styles.TrickContainerInner}>
- 
-      <Image 
-      style={{width:49,height:49}} 
-      source={{uri:Endpoints.ImageBaseUrl+item.image}}
-      borderRadius={1000}
-      />
-      
-      <View style={styles.InnerTricks}>
-      <Text style={{fontWeight:'bold',fontSize:18,color:Colors.BgColor}}>{item.title}</Text>
-      {/* <Text>please see the video.. below.......</Text> */}
-      {
-        selected === "New"?
-        <>
-        <Text style={styles.ListingText}>Status: <Text style={{color:Colors.send}}>{item.status}</Text></Text>
-        <Text style={styles.ListingText}>Price: <Text style={{color:Colors.deposit}}>{item.price}</Text></Text>
-
-        </>
-      :
-      <Text style={styles.ListingText}>Status: <Text style={{color:Colors.deposit}}>{item.end_date === currentDate ? "Completed":"Pending"}</Text></Text>
-
-      }
-      </View>
-      <TouchableOpacity onPress={()=> setIsOpen((p)=>!p)}>
-      <Image 
-      source={DropDwn}
-      style={{width:15,height:12}}
-      />
-      </TouchableOpacity>
-      
-      </Pressable>
-      {
-        isOpen === true &&
-        <>
-      <Text style={{textAlign:'center',marginTop:10,color:Colors.bgIII}}> 
-      {item.description}
-      
-      </Text>
-
-   <View style={styles.ListingRow}>
-
-<View style={{alignItems:"center"}}>
-    <Text style={styles.ListingTitle}>
-    Profit
-    </Text>
-    <Text style={styles.ListingText}>{selected==="New" ? item.profit_income:item.applied_income}</Text>
-</View>
-<View style={{alignItems:"center"}}>
-    <Text style={styles.ListingTitle}>
-    Price
-    </Text>
-    <Text style={styles.ListingText}>{selected ==="New"?item.price:item.applied_price}</Text>
-</View>
-<View style={{alignItems:"center"}}>
-    <Text style={styles.ListingTitle}>
-    Duration
-    </Text>
-    <Text style={styles.ListingText}>{item.profit_duration}</Text>
-</View>
-
-   </View>
-
-
-   <View style={styles.ListingRow}>
-
-<View style={{alignItems:"center"}}>
-    <Text style={styles.ListingTitle}>
-    Status
-    </Text>
-    {
-      selected === "New" ? 
-      <Text style={styles.ListingText}>{item.status}</Text>:
-      <Text style={styles.ListingText}>{item.end_date === currentDate ? "Completed":"Pending"}</Text>
-    }
-</View>
-<View style={{alignItems:"center"}}>
-    <Text style={styles.ListingTitle}>
-    Package Id
-    </Text>
-    <Text style={styles.ListingText}>{selected === "New"? item.id:item.package_id}</Text>
-</View>
-<View style={{alignItems:"center"}}>
-    <Text style={styles.ListingTitle}>
-    Income Cycle
-    </Text>
-    <Text style={styles.ListingText}>{item.cycle_duration}</Text>
-</View>
-
-   </View>
-
-
-{
-  item.status === "active" && selected === "New" ?
-   <TouchableOpacity 
-onPress={()=> {
-  // setSelectedPackage(item)
-setShowConfirmation(true)
-
-}}
->
-
-<ImageBackground 
-source={Button}
-style={{alignSelf:'center',width:109,height:30,alignItems:'center'}}
-
->
-
-<Text style={GlobalStyles.BtnText}>Invest</Text>
-
-</ImageBackground>
-</TouchableOpacity>   : null
-}
-
-{
-  showConfirmation === true &&
-<Confirmation 
-IsVisible={showConfirmation} 
-onHideModal={onHideModal} 
-selectedPackage={item}
-user={asyncdata.user}
-currentDate={currentDate}
-/>
-
-}
-      </>
-
-      }
-      </View>
-      
-      
-      )
-      }
-      
+    
 return(
   <View style={styles.LowerCart}>
-  <Text style={styles.L_Cart_Title}>{selected} Investment</Text>
-
-  <ScrollView
-showsVerticalScrollIndicator={false}
-nestedScrollEnabled={true}
-// refreshControl={
-//   <RefreshControl
-//   refreshing={refreshing}
-//   onRefresh={onRefresh}
-
-//   />
-// }
->
-{
-dataFinal.length > 0 ?
-
-dataFinal.map((item)=>{
-  return(
-    <InvestmentLists item={item} />
-
-  )
-}) :
-<Text style={{color:Colors.BgColor,fontSize:18,marginTop:40,alignSelf:"center"}}>No data found!</Text>
+  {/* <Text 
+  onPress={()=> setIsOpenInvModal(true)}
+  style={styles.L_Cart_Title}>{selected} Investment</Text> */}
+<ActivitySection/>
 
 
-}
-<View style={{height:150,width:100}}>
+<View style={styles.UpperCart}>
+<Text style={styles.balanceTitle}>Current Package</Text>
+<Text style={styles.BalanceTxt}>USD N/A</Text>
+
+
+<View style={{flexDirection:'row',alignItems:'center',margin:10}}>
+<View style={[styles.InnerModalHeader,{borderColor:Colors.SeconderyColor,borderRightWidth:1}]}>
+<Text style={styles.ModalTXt}>RO Investment</Text>
+<Text style={styles.ModalTXt}>Daily Income</Text>
+<Text style={styles.ModalTXt}>Total Invested</Text>
+<Text style={styles.ModalTXt}>Total Earned</Text>
+<Text style={styles.ModalTXt}>Package End Date</Text>
+<Text style={styles.ModalTXt}>Package Updated at</Text>
+
+
 
 </View>
-</ScrollView>
+<View style={styles.InnerModalHeader}>
+<Text style={styles.ModalTXt}>1 year</Text>
+<Text style={styles.ModalTXt}>2%</Text>
+<Text style={styles.ModalTXt}>250$</Text>
+<Text style={styles.ModalTXt}>20$</Text>
+<Text style={styles.ModalTXt}>12-12-2024</Text>
+<Text style={styles.ModalTXt}>12-12-2024</Text>
+
+</View>
+
+</View>
+
+<Text style={{color:Colors.PrimaryColor,marginBottom:10}}>You have not invested on any package yet</Text>
+
+<Pressable
+  onPress={()=> setIsOpenInvModal(true)}
+style={GlobalStyles.DullBtn}>
+<Text 
+style={styles.ModalTXt}
+>
+Invest
+</Text>
+</Pressable>
+</View>
+{/* 
+<View style={styles.UpperCart}>
+
+
+</View> */}
 
 </View>
 )
 }
 
+
+function onSelectPackage(){
+  setIsOpenInvModal(false)
+}
+
   return (
     <SafeAreaView style={styles.Container}>
 
-
+<View style={GlobalStyles.HeaderWrapper}>
 <View style={styles.Header}>
     <Text style={styles.OuterTxt}>Weclcome To{'\n'} <Text style={styles.InnerTxt}>Investment Screen</Text></Text>
   
@@ -403,7 +244,7 @@ dataFinal.map((item)=>{
       }
   
 </View>
-
+</View>
 
 
 {/* <BannerAd
@@ -428,10 +269,19 @@ dataFinal.map((item)=>{
     }
 
 >
-<UpperCart />
+{/* <UpperCart /> */}
 
 <LowerCart />
+{
+  isOpenInvModal === true && 
+<InvestmentListMOdal 
+isShow={isOpenInvModal}
+onSelect={onSelectPackage}
+dataFinal={dataFinal}
+currentDate={currentDate}
 
+/>
+}
 </ScrollView>
 
     </SafeAreaView>

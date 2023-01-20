@@ -140,7 +140,7 @@ style={{alignItems:'center'}}
 >
 
 <LinearGradient 
- colors={[ selected === "Income"? Colors.GoldII:Colors.bgIII, selected === "Income"? Colors.GoldI:Colors.bgIII]}
+ colors={[ selected === "Income"? Colors.PrimaryColor:Colors.bgIv, selected === "Income"? Colors.SeconderyColor:Colors.bgIv]}
  start={start} end={end}     
 style={styles.iconWrapper}>
 
@@ -165,7 +165,7 @@ style={{alignItems:'center'}}
 
 
 <LinearGradient 
- colors={[ selected === "Comission"? Colors.GoldII:Colors.bgIII, selected === "Comission"? Colors.GoldI:Colors.bgIII]}
+ colors={[ selected === "Comission"?  Colors.PrimaryColor:Colors.bgIv, selected === "Comission"?Colors.SeconderyColor:Colors.bgIv]}
  start={start} end={end}     
 style={styles.iconWrapper}>
 
@@ -187,11 +187,7 @@ Team Comission
 
 
 </View>
-</View>
-
-
-
-  )
+</View>  )
 }
 
 
@@ -248,12 +244,12 @@ function LowerCart(){
   
   
   <View style={styles.InnerTricks}>
-  <Text style={{fontWeight:'bold',fontSize:18,color:Colors.BgColor}}>Comission</Text>
+  <Text style={{fontWeight:'bold',fontSize:18,color:Colors.FontColorI}}>Comission</Text>
   
 
     <>
-    <Text style={{color:Colors.bgIII}}>Chain Name: {item.username}</Text>
-    <Text style={{color:Colors.bgIII}}>Chain Id: {item.commission_from}</Text>
+    <Text style={{color:Colors.FontColorI}}>Chain Name: {item.username}</Text>
+    <Text style={{color:Colors.FontColorI}}>Chain Id: {item.commission_from}</Text>
     </>
 
 
@@ -382,9 +378,6 @@ setshowProgressLoader(true)
 <Text style={styles.SingleIncomeText}>
   Package Id: {item.package_id}
 </Text>
-<Text style={styles.SingleIncomeText}>
-  Last Time: {item.start_time}
-</Text>
 
 
 
@@ -395,18 +388,13 @@ setshowProgressLoader(true)
 <Text style={styles.SingleIncomeText}>
   Package Start Time: {item.started_time}
 </Text>
-<Text style={styles.SingleIncomeText}>
-  Package End Date: {moment(item.end_date).format('DD-MM-YYYY')}
-</Text>
-<Text style={styles.SingleIncomeText}>
-  Package End Time: {item.end_time}
-</Text>
+
 <Text style={styles.SingleIncomeText}>
   Esitmated Earning: {item.cycle_earning}
 </Text>
 
 
-{refreshing === true ?
+{/* {refreshing === true ?
 
 <Text style={[styles.SingleIncomeText,{color:Colors.deposit,textDecorationLine:'underline'}]}>
  Loading......
@@ -426,17 +414,17 @@ style={{width:20,height:20,tintColor:Colors.deposit}}
 />
 
 </Pressable>
-}
+} */}
 
 <Text style={[styles.SingleIncomeText,{color:Colors.send}]}>
-  Income: {+item.amount}
+  Income: {item.amount}
 </Text>
 </View>
 
 
   <View style={{alignItems:"center",marginRight:10}}>
 
-{
+{/* {
   hours >=1 ? 
   <Text
   onPress={()=>  CollectAmount()}
@@ -444,7 +432,7 @@ style={{width:20,height:20,tintColor:Colors.deposit}}
 <Text   style={[styles.TransactionText,{color:Colors.placeHolder}]}>Pending</Text>
 
 
-}
+} */}
   
 
 
@@ -477,7 +465,7 @@ onHideLoader={onHideLoader}
 return(
   <View style={styles.LowerCart}>
   <Text style={styles.L_Cart_Title}>{LowerCardTitle}</Text>
-  <Text style={{color:Colors.danger,marginLeft:20,fontWeight:'bold',fontSize:17}}>Note:<Text style={{color:Colors.BgColor,fontWeight:'500',fontSize:14}}> Daily income refreshes at 12:00 am.</Text></Text>
+  {/* <Text style={{color:Colors.danger,marginLeft:20,fontWeight:'bold',fontSize:17}}>Note:<Text style={{color:Colors.FontColorI,fontWeight:'500',fontSize:14}}> Daily income refreshes at 12:00 am.</Text></Text> */}
 
 
 
@@ -488,7 +476,7 @@ nestedScrollEnabled={true}
 >
 {
 data.length < 1?
-<Text style={{color:Colors.BgColor,fontSize:18,marginTop:40,alignSelf:"center"}}>No data found!</Text>:
+<Text style={{color:Colors.FontColorI,fontSize:18,marginTop:40,alignSelf:"center"}}>No data found!</Text>:
 data.map((item)=>{
   return(<>
   {

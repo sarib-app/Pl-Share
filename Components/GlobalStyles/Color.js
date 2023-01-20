@@ -1,5 +1,5 @@
 const Colors = {
-    PrimaryColor:"#3EB8B4",
+    PrimaryColor:"#3EB88B",
     SeconderyColor:"#AFDFDE",
     placeHolder:"rgba(160,160,160,0.6)",
     GoldI:"#C49C48",

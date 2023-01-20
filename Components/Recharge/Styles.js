@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         width:WindowWidth/1.1,
         // height:WindowHeight/10,
         alignSelf:'center',
-        alignItems:'center',
+        // alignItems:'center',
         margin:15
       },
       LowerCart: {

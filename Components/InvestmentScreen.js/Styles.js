@@ -26,12 +26,13 @@ const styles = StyleSheet.create({
         width: WindowWidth / 1.15,
         padding: 15,
         // height:WindowHeight/3,
-        borderRadius: 30,
-        backgroundColor: Colors.BgColorII,
+        borderRadius: 8,
+        backgroundColor: Colors.bgIv,
         borderColor: Colors.PrimaryColor,
-        borderWidth: 1,
+        // borderWidth: 1,
         alignItems: 'center',
-        margin: 25
+        margin: 10,
+        alignSelf:'center'
     },
     balanceTitle: { color: Colors.lightTxt },
     BalanceTxt: {
@@ -85,13 +86,13 @@ const styles = StyleSheet.create({
         height: WindowHeight / 1.1,
 
 
-        backgroundColor: Colors.FontColorI,
+        backgroundColor: Colors.BgColorII,
         borderRadius: 40,
-        borderWidth: 1,
+        // borderWidth: 1,
         borderColor: Colors.PrimaryColor,
     },
     L_Cart_Title: {
-        color: Colors.BgColor,
+        color: Colors.FontColorI,
         fontWeight: 'bold',
         margin: 25,
         marginBottom: 10,
@@ -105,15 +106,15 @@ const styles = StyleSheet.create({
     TrickContainer:{
         width:WindowWidth/1.1,
         // height:20,
-        borderRadius:20,
-        borderWidth:0.5,
-        borderColor:Colors.PrimaryColor,
+        borderRadius:8,
+        // borderWidth:0.5,
+        // borderColor:Colors.PrimaryColor,
         alignSelf:"center",
         padding:15,
         shadowColor:Colors.BgColor,
-        elevation:1,
+        elevation:4,
         shadowRadius:4,
-        backgroundColor:Colors.FontColorI,
+        backgroundColor:Colors.bgIv,
         marginBottom:15,
         alignItems:'center'
     },
@@ -148,12 +149,12 @@ alignItems:'center',
 marginTop:10
     },
     ListingTitle:{
-color:Colors.BgColor,
+color:Colors.PrimaryColor,
 fontWeight:'bold',
 fontSize:17
     },
     ListingText:{
-color:Colors.bgIII,
+color:Colors.FontColorI,
 
     },
 
