@@ -10,8 +10,8 @@ const styles = StyleSheet.create({
     Container: {
         width: WindowWidth,
         height: WindowHeight,
-        backgroundColor: Colors.BgColor,
-        alignItems: "center",
+        backgroundColor: Colors.BgColorII,
+                alignItems: "center",
 
     },
     Header: {
@@ -27,10 +27,13 @@ const styles = StyleSheet.create({
         width: WindowWidth / 1.15,
         padding: 40,
         // height:WindowHeight/3,
+        shadowColor:Colors.BgColor,
+        shadowRadius:2,
+        elevation:4,
         borderRadius: 30,
-        backgroundColor: Colors.BgColorII,
-        borderColor: Colors.PrimaryColor,
-        borderWidth: 1,
+        backgroundColor: Colors.bgIv,
+        // borderColor: Colors.PrimaryColor,
+        // borderWidth: 1,
         alignItems: 'center',
         margin: 25
     },
@@ -84,31 +87,33 @@ const styles = StyleSheet.create({
         // justifyContent:'space-between'
     },
     iconWrapper: {
+    
         alignItems: 'center',
         marginRight: 29,
+    
     },
+    
     LowerCart: {
-        width: WindowWidth,
-        height: WindowHeight / 1.1,
-
-
-        backgroundColor: Colors.FontColorI,
-        borderRadius: 40,
-        borderWidth: 1,
-        borderColor: Colors.PrimaryColor,
+        
+    width: WindowWidth,
+    height: WindowHeight / 1.1,
+    backgroundColor: Colors.BgColorII,
+    borderColor: Colors.PrimaryColor,
+   
     },
+    
     OptionWrapper:{
-width:100,
-height:100,
-backgroundColor:'white',
-shadowColor:Colors.PrimaryColor,
-elevation:4,
-shadowOffset:{ width: 100 ,height: 10 },
-borderRadius:10,
-shadowRadius:10,
-margin:10,
-alignItems:"center",
-justifyContent:"center"
+    width:100,
+    height:100,
+    backgroundColor:Colors.bgIv,
+    shadowColor:Colors.BgColor,
+    elevation:4,
+    shadowOffset:{ width: 100 ,height: 10 },
+    borderRadius:8,
+    shadowRadius:10,
+    margin:10,
+    alignItems:"center",
+    justifyContent:"center"
     },
     L_Cart_Title: {
         color: Colors.BgColor,

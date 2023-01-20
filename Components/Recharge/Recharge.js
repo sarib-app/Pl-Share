@@ -65,9 +65,13 @@ function Navigation(item){
     <Pressable 
      onPress={()=> Navigation(item)}
      style={{shadowColor:'red', elevation:2}}>
-    <Image source={item.Image}
-    style={{width:134,height:90,marginRight:10,}}
+<View style={GlobalStyles.DullBtn}>
+<Image source={item.Image}
+    style={{width:item.width,height:item.height,marginRight:10,tintColor:Colors.PrimaryColor}}
     />
+</View>
+
+    
     </Pressable>
     )
     

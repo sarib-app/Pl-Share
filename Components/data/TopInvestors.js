@@ -9,6 +9,7 @@ import BINANCE from '../../assets/icons/BINANCE.png'
 import easypaisa from '../../assets/icons/easypaisa.png'
 import Visa from '../../assets/icons/Visa.png'
 import OKX from '../../assets/icons/OKX.png'
+import TrustWallet from '../../assets/icons/TrustWallet.png'
 
 import withdrawlIIicon from '../../assets/icons/withdrawII.png'
 import allIcon from '../../assets/icons/all.png'
@@ -138,41 +139,12 @@ const DepositMethod = [
         id: 1,
         Acc_Type: "Jazzcash",
         Acc_SubType: 'Jazzcash',
-        Image: jazzcash
+        Image: TrustWallet,
+        height:40,
+        width:80
 
     },
-    {
-
-        id: 2,
-        Acc_Type: "EasyPaisa",
-        Acc_SubType: 'EasyPaisa',
-        Image: easypaisa
-
-    },
-    {
-
-        id: 3,
-        Acc_Type: "Binance",
-        Acc_SubType: 'Binance',
-        Image: BINANCE
-
-    },
-    {
-
-        id: 4,
-        Acc_Type: "VISA",
-        Acc_SubType: 'VISA',
-        Image: Visa
-
-    },
-    {
-
-        id: 5,
-        Acc_Type: "OKX",
-        Acc_SubType: 'OKX',
-        Image: OKX
-
-    },
+    
 
 ]
 

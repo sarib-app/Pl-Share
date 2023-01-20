@@ -15,6 +15,18 @@ import Colors from './Color';
       alignItems:"center",
       justifyContent:"center"
     },
+    
+    DullBtn:{
+      padding:20,
+      paddingTop:10,
+      paddingBottom:10,
+      backgroundColor:Colors.BgColorII,
+      borderRadius:8,
+      shadowColor:Colors.BgColorII,
+      elevation:4,
+      shadowRadius:20
+    },
+
     HeaderWrapper:{
       width:WindowWidth,
       height:WindowHeight/12,

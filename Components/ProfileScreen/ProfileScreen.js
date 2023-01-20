@@ -24,6 +24,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Endpoints from '../../EnDPoints';
 import PrivacyPolicy from '../App\'sContent/PrivacyPolicy';
+import GlobalStyles from '../GlobalStyles/GlobalStyles';
 import Tos from '../App\'sContent/Tos';
 const WindowWidth = Dimensions.get('window').width
 
@@ -160,10 +161,10 @@ function OptionList({item}){
     <View style={styles.OptionWrapper}>
    <Image
    source={item.icon}
-   style={{width:item.width,height:item.height}}
+   style={{width:item.width,height:item.height,tintColor:item.rout_to === "Login"?Colors.danger: Colors.FontColorI}}
    />
     </View>
-<Text style={{color:Colors.BgColor,textAlign:'center',fontWeight:"bold"}}>{item.title}</Text>
+<Text style={{color:Colors.FontColorI,textAlign:'center',fontWeight:"bold"}}>{item.title}</Text>
 
 
 <PrivacyPolicy
@@ -219,7 +220,7 @@ renderItem={({item})=>
 }
 return (
     <SafeAreaView style={styles.Container}>
-
+<View style={GlobalStyles.HeaderWrapper}>
 
 <View style={styles.Header}>
     <View style={{flexDirection:'row',alignItems:'center'}}>
@@ -233,11 +234,11 @@ return (
 <Text style={styles.InnerTxt}>{user.firstname} {user.lastname}{'\n'} <Text style={styles.OuterTxt}>{user.phone}</Text></Text>
     </View>
 <Pressable onPress={()=> navigation.navigate('DecideUpdate')}>
-<Image source={updateProfIcon} style={{width:29,height:21}}/>
+<Image source={updateProfIcon} style={{width:29,height:21,tintColor:Colors.PrimaryColor }}/>
 
 </Pressable>
 </View>
-
+</View>
 
 <ScrollView nestedScrollEnabled={true}
 scrollEnabled={false}
@@ -247,21 +248,17 @@ refreshControl={
   <RefreshControl
   refreshing={refreshing}
   onRefresh={onRefresh}
-  
-
-
   />
 }
-
-
 >
+<View style={GlobalStyles.BgCart}>
+
 <UpperCart/>
-
+</View>
 <LowerCart/>
-
 </ScrollView>
+</SafeAreaView>
 
-    </SafeAreaView>
 )
 }
 export default ProfileScreen;

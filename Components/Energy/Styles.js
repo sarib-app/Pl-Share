@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     Container: {
         width: WindowWidth,
         height: WindowHeight,
-        backgroundColor: Colors.BgColor,
+        backgroundColor: Colors.BgColorII,
         alignItems: "center",
 
     },
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'red'
     },
     catSection: {
-        width: WindowWidth / 1.27,
+        width: WindowWidth ,
         flexDirection: 'row',
         alignItems:"center",
         margin:0,
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: WindowWidth / 3.3,
         height:WindowHeight/11,
-        borderRadius:15,
+        borderRadius:8,
         backgroundColor:"black",
         justifyContent:'center'
 
@@ -90,13 +90,11 @@ const styles = StyleSheet.create({
         height: WindowHeight / 1.1,
 
 
-        backgroundColor: Colors.FontColorI,
-        borderRadius: 40,
-        borderWidth: 1,
-        borderColor: Colors.PrimaryColor,
+        backgroundColor: Colors.BgColorII,
+  
     },
     L_Cart_Title: {
-        color: Colors.BgColor,
+        color: Colors.FontColorI,
         fontWeight: 'bold',
         margin: 25,
         marginBottom: 10,
@@ -120,12 +118,15 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'space-between',
-        borderBottomWidth:1,
+        // borderBottomWidth:1,
         borderColor:Colors.placeHolder,
         alignSelf:"center",
-        paddingTop:10,
-        paddingBottom:10,
-
+        paddingTop:15,
+        marginBottom:5,
+        paddingBottom:15,
+         backgroundColor:Colors.bgIv,
+         padding:5,
+         borderRadius:8,
         // marginBottom:15,
         alignItems:'center'
     },
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
     },
 IconWrapper:{
 
-        backgroundColor:"rgba(23, 23, 23, 0.1)",
+        backgroundColor:Colors.bgIv,
         width:50,
         height:50,
         borderRadius:10,
@@ -167,7 +168,7 @@ IconWrapper:{
         width:WindowWidth/1.1,
         padding:10,
         // height:WindowHeight/8,
-        backgroundColor:"white",
+        backgroundColor:Colors.bgIv,
         elevation:4,
         shadowColor:"black",
         margin:10,
@@ -184,7 +185,7 @@ IconWrapper:{
     //  backgroundColor:"yellow"
     },
     SingleIncomeText:{
-        color:Colors.BgColor,
+        color:Colors.FontColorI,
         fontWeight:'bold'
         
     }
