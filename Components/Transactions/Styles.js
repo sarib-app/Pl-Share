@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     
  
     InnerTricks:{
-        width:WindowWidth/2,
+        // width:WindowWidth/2,
         marginLeft:15,
         // height:20,
         

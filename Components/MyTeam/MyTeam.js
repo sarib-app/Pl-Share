@@ -33,9 +33,20 @@ const navigation = useNavigation()
 
   const [firstTeamList,setFirstTeamList]=useState([])
   const [secondTeamList,setSecondTeam]=useState([])
+  
+
+  const [thirdTeamList,setThirdTeam]=useState([])
+  const [fourthTeam,setFourthTeam]=useState([])
+
+
+  const [fifthTeam,setFifthTeam]=useState([])
+  const [sixthTeam,setSixthTeam]=useState([])
+
   const [selected,setIsSelected]=useState(1)
   
-  const data = selected === 1 ?firstTeamList : secondTeamList
+  const data = selected === 1 ?firstTeamList : selected === 2 ?secondTeamList :selected === 3 ?thirdTeamList:
+  selected === 4 ?fourthTeam:selected === 5 ?fifthTeam : selected === 6 ?sixthTeam:firstTeamList
+
 
 
 
@@ -88,6 +99,12 @@ function getTeamList(user_id){
       if(result.status==="200"){
         setFirstTeamList(result.first_members)
         setSecondTeam(result.second_members)
+        setThirdTeam(result.third_members)
+        setFourthTeam(result.fourth_members)
+        setFifthTeam(result.fifth_members)
+        setSixthTeam(result.sixth_members)
+
+
 
 
       }
@@ -182,13 +199,32 @@ return (
 <View style={styles.TrickContainer}>
 <Text 
 onPress={()=> setIsSelected(1)}
-style={[styles.TextStyle,{color:selected===1 ? Colors.FontColorI:Colors.bgIII}]}>1st Refer</Text>
+style={[styles.TextStyle,{color:selected===1 ? Colors.FontColorI:Colors.bgIII}]}>1st</Text>
 <Text
 onPress={()=> setIsSelected(2)}
 
 
-style={[styles.TextStyle,{color:selected===2 ? Colors.FontColorI:Colors.bgIII}]}>2nd Refer</Text>
+style={[styles.TextStyle,{color:selected===2 ? Colors.FontColorI:Colors.bgIII}]}>2nd</Text>
+<Text
+onPress={()=> setIsSelected(3)}
 
+
+style={[styles.TextStyle,{color:selected===3 ? Colors.FontColorI:Colors.bgIII}]}>3rd</Text>
+<Text
+onPress={()=> setIsSelected(4)}
+
+
+style={[styles.TextStyle,{color:selected===4 ? Colors.FontColorI:Colors.bgIII}]}>4th</Text>
+<Text
+onPress={()=> setIsSelected(5)}
+
+
+style={[styles.TextStyle,{color:selected===5 ? Colors.FontColorI:Colors.bgIII}]}>5th</Text>
+<Text
+onPress={()=> setIsSelected(6)}
+
+
+style={[styles.TextStyle,{color:selected===6 ? Colors.FontColorI:Colors.bgIII}]}>6th</Text>
 </View>
 
 <FlatList 

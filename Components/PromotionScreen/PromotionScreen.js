@@ -34,7 +34,7 @@ import SpinnerButton from 'react-native-spinner-button';
 import upload_img_icon from '../../assets/icons/upload_img.png'
 import referenceCnic from '../../assets/icons/referenceCnic.png'
 
-
+import { ButtonBig } from '../GlobalStyles/Buttons';
 
 // import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
 // const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-7224745157985009/9676971080';
@@ -135,70 +135,6 @@ const [result,setResult] = useState("")
 
 
 
-
-
-
-   const permissionForGalleryII=async ()=>{
-    if (Platform.OS === 'ios') {
-        SelectFromGalleryII();
-      } else {
-        try {
-          const granted = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-            {
-              title: 'Storage Permission Required',
-              message:
-                'Application needs access to your storage to download File',
-            }
-          );
-  
-  
-          const grantedRead = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-            {
-              title: 'Storage Permission Required',
-              message:
-                'Application needs access to your storage to upload file',
-            }
-          );
-          if (granted === PermissionsAndroid.RESULTS.GRANTED && grantedRead === PermissionsAndroid.RESULTS.GRANTED) {
-            // Start downloading
-            SelectFromGalleryII();
-            
-  alert("Download started please wait")
-  
-          } else {
-            // If permission denied then show alert
-            Alert.alert('Error','Storage Permission Not Granted');
-          }
-        } catch (err) {
-          // To handle permission related exception
-          console.log("++++"+err);
-        }
-      }
-   }
-   async function SelectFromGalleryII(){
-    ImagePicker.launchImageLibrary({ mediaType: 'image', includeBase64: false, }, (response) => {
-        if(response.didCancel !=true){
-          // UploadScreenShot(response.assets[0])
-            setCnicimg(response.assets[0])
-
-        }
-        else{
-            console.log("jedhfk")
-        }
-  
-    })
-   }
-
-
-
-
-
-
-
-
-
 function CheckImages(){
   if(!proof_image && !cnicimg){
     
@@ -214,50 +150,34 @@ function CheckImages(){
 
   function UploadScreenShot (){
   setLoading(true)
-    const uri =
-    Platform.OS === "android"
-      ? cnicimg.uri
-      : cnicimg.uri.replace("file://", "");
-  const filename = cnicimg.uri.split("/").pop();
-  const match = /\.(\w+)$/.exec( String(filename));
-  const ext = match?.[1];
-  const type = match ? `image/${match[1]}` : `image`;
+   
   
 
 
 
 
 
-  const uriII =
+  const uri =
   Platform.OS === "android"
     ? proof_image.uri
     : proof_image.uri.replace("file://", "");
 const filenameI = proof_image.uri.split("/").pop();
-const matchI = /\.(\w+)$/.exec( String(filenameI));
-const extI = matchI?.[1];
-const typeI = matchI ? `image/${matchI[1]}` : `image`;
+const match= /\.(\w+)$/.exec( String(filenameI));
+const ext = match?.[1];
+const type = match ? `image/${match[1]}` : `image`;
 
-
-
-
-
-  console.log(asyndata.user.id)
   
   
   var formdata = new FormData();
   formdata.append("member_id",asyndata.user.id);
   formdata.append("member_name", asyndata.user.username);
+  formdata.append("amount", "5");
   formdata.append("image", {
     uri:uri,
     name: `image.${ext}`,
     type:type,
   } );
-  formdata.append("image_2", {
-    uri:uriII,
-    name: `image_2.${extI}`,
-    type:typeI,
-  } );
-  formdata.append("amount", "500");
+ 
   
   var requestOptions = {
     method: 'POST',
@@ -268,6 +188,7 @@ const typeI = matchI ? `image/${matchI[1]}` : `image`;
   fetch(`${BaseUrl}post_reward`, requestOptions)
     .then(response => response.json())
     .then(result => {
+      console.log(result)
 
       if(result.status === "200")
     {
@@ -289,12 +210,7 @@ const typeI = matchI ? `image/${matchI[1]}` : `image`;
       setLoading(false)
       console.log('error', error)});
   
-  
 
-  
-  
-  
-  
   
   }
 
@@ -306,14 +222,14 @@ const typeI = matchI ? `image/${matchI[1]}` : `image`;
     <SafeAreaView style={styles.Container}>
 
 <BackBtn/>
-<BannerAd
+{/* <BannerAd
       unitId={adUnitId}
       size={BannerAdSize.FULL_BANNER}
       requestOptions={{
         requestNonPersonalizedAdsOnly: true,
       }}
       
-      />
+      /> */}
 <ScrollView
 contentContainerStyle={{alignItems:"center"}}
 >
@@ -327,16 +243,11 @@ contentContainerStyle={{alignItems:"center"}}
 
 <Text style={styles.DetailTitle}>2 : <Text style={styles.DetailTxt}>{result !="" ?result.text2:"Take a picture of that Bill." }</Text></Text>
 <Text style={styles.DetailTitle}>3 : <Text style={styles.DetailTxt}>{result !="" ?result.text3:"Upload that picture below." }</Text></Text>
-<Text style={styles.DetailTitle}>4 : <Text style={styles.DetailTxt}>Capture a selfie which shows your face and your CNIC clearly just like an example shown below. "THIS IS REQUIRED TO PREVENT SCAMS"</Text></Text>
-<Image 
-source={referenceCnic}
-style={{width:200,height:200}}
-/>
+<Text style={styles.DetailTitle}>4 : <Text style={styles.DetailTxt}>Hit the submit button and your request is generated</Text></Text>
 
 
-<Text style={styles.DetailTitle}>5 : <Text style={styles.DetailTxt}>{result !="" ?result.text4:"Upload that selfie by hitting the button below and submit." }</Text></Text>
 
-<Text style={styles.DetailTitle}>6 : <Text style={styles.DetailTxt}>Thats it, your 500 RS will be available in your withdraw.</Text></Text>
+
 
 
 
@@ -394,30 +305,7 @@ style={{width:115,height:104,marginLeft:10  }}
 
 
 
-<Text style={styles.TxtInputTitle}>
- Upload CNIC image
-</Text>
-<Pressable
-onPress={()=>permissionForGalleryII()}
-style={[GlobalStyles.TextInput,{borderColor: !cnicimg &&isPressed === true ? Colors.danger:Colors.BgColorII
 
-,justifyContent:"center",alignItems:'center',height:WindowHeight/4
-}]}
->
-{
-  cnicimg? <Image
-  source={{uri:cnicimg.uri}}
-  style={{width:300,height:150,marginLeft:10}}
-  />:
-  <Image
-source={upload_img_icon}
-style={{width:115,height:104,marginLeft:10}}
-/>
-}
-
-
-
-</Pressable>
 
 
 
@@ -452,15 +340,12 @@ style={GlobalStyles.Button}
 onPress={()=> CheckImages()}
 >
 
-<ImageBackground 
-source={longBtn}
-style={GlobalStyles.Button}
+<ButtonBig 
+title={"Submit"}
+/>
 
->
 
-<Text style={GlobalStyles.BtnText}>Submit Now</Text>
 
-</ImageBackground>
 </Pressable>
 
 :

@@ -28,7 +28,7 @@ const navigation = useNavigation()
     
     style={{flexDirection:"row",marginTop:10,alignSelf:'flex-start',left:15,alignItems:'center'}}>
       <Image  source={gobackIcon}
-      style={{width:12,height:15}}
+      style={{width:12,height:15,tintColor:Colors.PrimaryColor}}
       />
     <Text style={{color:Colors.PrimaryColor}}> Go Back</Text>
     </Pressable>

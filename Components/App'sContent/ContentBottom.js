@@ -42,29 +42,32 @@ return(
   <Text style={styles.L_Cart_Title}>{title}</Text>
   </View>
 <View style={styles.InnerLowerCart}>
-  <ScrollView>
+  {/* <ScrollView> */}
 {
   title === "Terms of Services"?
 
   <WebView 
-style={{width:350,height:450}}
-source={{uri: "https://termsandservices.tradingtube.co/"}}
+style={{width:350,height:600}}
+source={{uri: "http://termsandconditions.plshare.com/"}}
 javaScriptEnabled={true}
 domStorageEnabled={true}
 startInLoadingState={true}
 >
 </WebView>:
 
-<RenderHtml 
-
-contentWidth={WindowWidth / 2}
-source={Content}
-/>
+<WebView 
+style={{width:350,height:600}}
+source={{uri: "https://privacypolicy.plshare.com/"}}
+javaScriptEnabled={true}
+domStorageEnabled={true}
+startInLoadingState={true}
+>
+</WebView>
 }
-</ScrollView>
+{/* </ScrollView> */}
 
 </View>
-<View style={{flexDirection:'row',marginLeft:15,alignItems:'center',marginTop:5}}>
+{/* <View style={{flexDirection:'row',marginLeft:15,alignItems:'center',marginTop:5}}>
 
 <Image 
 source={SettingsTit}
@@ -92,7 +95,7 @@ style={{width:115,height:32,alignItems:'center',justifyContent:'center'}}
   </ImageBackground>
   </Pressable>
 
-</View>
+</View> */}
 
 
 </View>

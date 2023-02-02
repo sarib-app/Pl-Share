@@ -39,7 +39,7 @@ style={styles.OptionBox}>
   style={{width:90,height:100,tintColor:Colors.FontColorI}}
   />
     <Text style={styles.HeaderText}>
-  Share Plans</Text>
+  Bonus Details</Text>
 </Pressable>
 
 

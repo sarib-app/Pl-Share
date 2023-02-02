@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
     },
     InnerTricks:{
         width:WindowWidth/1.6,
+        alignSelf:'center'
         // height:20,
         // backgroundColor:'red',
         

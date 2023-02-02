@@ -50,7 +50,7 @@ onPress={()=> navigation.navigate("UpdateProfile",{identifier:"password"})}
 style={styles.OptionBox}>
 <Image
   source={lock}
-  style={{width:70,height:70,tintColor:Colors.FontColorI}}
+  style={{width:60,height:79,tintColor:Colors.FontColorI}}
   />
   <Text style={styles.HeaderText}>
   Change Password</Text>

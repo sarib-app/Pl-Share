@@ -35,6 +35,7 @@ import Confirmation from './ConfirmationModal';
 import getAsync from '../GetAsynData/getAsync';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import InvestmentListMOdal from './InvestmentListMOdal';
+import moment from 'moment';
 
 // import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
 
@@ -44,8 +45,10 @@ function InvestmentScreen({
   AllPackages,
   forceReload,
   currentDate,
-  MyPackages,
-  total_Record
+  // MyPackages,
+  total_Record,
+  isInvested,
+  MyPackages
 }) {
    const asyncdata = getAsync()
   const [selected,setSelected]=useState("New") 
@@ -98,7 +101,7 @@ const end = {x: 0, y: 0}
 /////Functions////////////
 
 
-const dataFinal = selected === "New"? AllPackages.sort((a,b)=> a.price - b.price) :selected === "Pending"? MyPackages.filter((item)=> item.end_date != currentDate):selected === "Completed"? MyPackages.filter((item)=> item.end_date === currentDate):MyPackages
+const dataFinal =  AllPackages
 
 const onRefresh = useCallback(() => {
 
@@ -131,7 +134,7 @@ function ActivitySection(){
   return(
 <View style={[styles.UpperCart,{marginTop:30}]}>
 <Text style={styles.balanceTitle}>Total Investment</Text>
-<Text style={styles.BalanceTxt}>PKR {total_Record !=""? total_Record.Total_investment:0}</Text>
+<Text style={styles.BalanceTxt}>USD {total_Record !=""? total_Record.Total_investment:0}</Text>
 
 <View style={styles.LvlContainer}>
 <Text style={styles.LvlTxt}>Level <Text style={styles.LvlinnerTxt}>{total_Record !=""? total_Record.my_level:0}</Text></Text>
@@ -150,8 +153,7 @@ function ActivitySection(){
 
 
 
-
-
+//    
 
 
 
@@ -169,28 +171,52 @@ return(
 
 <View style={styles.UpperCart}>
 <Text style={styles.balanceTitle}>Current Package</Text>
-<Text style={styles.BalanceTxt}>USD N/A</Text>
+<Text style={styles.BalanceTxt}>{ isInvested === false ?"N/A":MyPackages.package_name}</Text>
 
 
 <View style={{flexDirection:'row',alignItems:'center',margin:10}}>
 <View style={[styles.InnerModalHeader,{borderColor:Colors.SeconderyColor,borderRightWidth:1}]}>
 <Text style={styles.ModalTXt}>RO Investment</Text>
 <Text style={styles.ModalTXt}>Daily Income</Text>
+<Text style={styles.ModalTXt}>Income per 40 days</Text>
+
 <Text style={styles.ModalTXt}>Total Invested</Text>
 <Text style={styles.ModalTXt}>Total Earned</Text>
-<Text style={styles.ModalTXt}>Package End Date</Text>
+<Text style={styles.ModalTXt}>Package</Text>
+<Text style={styles.ModalTXt}>First Purchase</Text>
+
 <Text style={styles.ModalTXt}>Package Updated at</Text>
 
 
 
 </View>
 <View style={styles.InnerModalHeader}>
+  {
+    isInvested === false ?
+<>
+<Text style={styles.ModalTXt}>N/A</Text>
+<Text style={styles.ModalTXt}>N/A</Text>
+<Text style={styles.ModalTXt}>N/A</Text>
+<Text style={styles.ModalTXt}>N/A</Text>
+<Text style={styles.ModalTXt}>N/A</Text>
+<Text style={styles.ModalTXt}>N/A</Text>
+</>:
+<>
+
 <Text style={styles.ModalTXt}>1 year</Text>
-<Text style={styles.ModalTXt}>2%</Text>
-<Text style={styles.ModalTXt}>250$</Text>
-<Text style={styles.ModalTXt}>20$</Text>
-<Text style={styles.ModalTXt}>12-12-2024</Text>
-<Text style={styles.ModalTXt}>12-12-2024</Text>
+<Text style={styles.ModalTXt}>{MyPackages.daily_income} USDT</Text>
+<Text style={styles.ModalTXt}>{MyPackages.daily_income*40} USDT</Text>
+
+<Text style={styles.ModalTXt}>{MyPackages.amount}</Text>
+<Text style={styles.ModalTXt}>{MyPackages.balance_got}</Text>
+<Text style={styles.ModalTXt}>{MyPackages.package_name}</Text>
+<Text style={styles.ModalTXt}>{moment(MyPackages.created_at).format("DD-MM-YYYY")}</Text>
+<Text style={styles.ModalTXt}>{MyPackages.updated_date}</Text>
+
+</>
+
+  }
+
 
 </View>
 
@@ -204,7 +230,7 @@ style={GlobalStyles.DullBtn}>
 <Text 
 style={styles.ModalTXt}
 >
-Invest
+{isInvested===false?"Invest":"Upgrade"} 
 </Text>
 </Pressable>
 </View>
@@ -221,6 +247,8 @@ Invest
 
 function onSelectPackage(){
   setIsOpenInvModal(false)
+  forceReload()
+  console.log("CHAL PARRA HAI YARR")
 }
 
   return (
@@ -279,6 +307,7 @@ isShow={isOpenInvModal}
 onSelect={onSelectPackage}
 dataFinal={dataFinal}
 currentDate={currentDate}
+isInvested={isInvested}
 
 />
 }

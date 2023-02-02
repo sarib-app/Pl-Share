@@ -147,8 +147,8 @@ style={{width:100,height:100,borderRadius:10}}
 </View>
 <View style={{marginLeft:30,marginTop:15}}>
 <Text style={styles.ModalBelowTitles}>No of Comissions you recieved: <Text style={{color:Colors.PrimaryColor,fontWeight:'bold'}}>{item.total_no_earned}</Text></Text>
-<Text style={styles.ModalBelowTitles}>Your Earned Comission: <Text style={{color:Colors.PrimaryColor,fontWeight:'bold'}}>PKR {item.total_earned}</Text></Text>
-<Text style={styles.ModalBelowTitles}>{item.username}'s Total Earning: <Text style={{color:Colors.PrimaryColor,fontWeight:'bold'}}>PKR {item.balance}</Text></Text>
+<Text style={styles.ModalBelowTitles}>Your Earned Comission: <Text style={{color:Colors.PrimaryColor,fontWeight:'bold'}}>USD {item.total_earned}</Text></Text>
+<Text style={styles.ModalBelowTitles}>{item.username}'s Total Earning: <Text style={{color:Colors.PrimaryColor,fontWeight:'bold'}}>USD {item.balance}</Text></Text>
 
 </View>
 

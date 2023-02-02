@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
     },
     iconWrapper: {
         alignItems: 'center',
-        width: WindowWidth / 3.3,
-        height:WindowHeight/11,
+        width: WindowWidth / 4.5,
+        height:WindowHeight/13,
         borderRadius:8,
         backgroundColor:"black",
         justifyContent:'center'
@@ -134,8 +134,8 @@ const styles = StyleSheet.create({
     
  
     InnerTricks:{
-        width:WindowWidth/2,
-        marginLeft:15,
+        // width:WindowWidth/2,
+        // marginLeft:15,
         // height:20,
         
     },

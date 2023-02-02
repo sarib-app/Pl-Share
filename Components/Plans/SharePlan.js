@@ -49,7 +49,7 @@ const onShare = async () => {
     try {
       const result = await Share.share({
         message:
-          `Hey there click here to register on tradingtube with my referal code URL https://registration.tradingtube.co/?${user ? user.referal_code:""}`,
+          `Hey there click here to register on PLSHARE with my referal code URL https://registration.plshare.com/?${user ? user.referal_code:""}`,
       });
   
       if (result.action === Share.sharedAction) {
@@ -85,7 +85,7 @@ function LowerCart(){
     return(
         <View style={styles.LowerCart}>
     <View style={styles.InnerlowCart}>
-<Text style={styles.TxtClr}>Plans</Text>
+<Text style={styles.TxtClr}>Types of Bonus & Details</Text>
 
     </View>
    
@@ -95,16 +95,16 @@ function LowerCart(){
     showsVerticalScrollIndicator={false}
     >
 
-<Text style={styles.DescriptionStyle}><Text style={{fontWeight:"bold"}}>1: </Text>If you refer someone they will be considered as 1st link and you will get 5% of their income.</Text>
-<Text style={styles.DescriptionStyle}><Text style={{fontWeight:"bold"}}>2: </Text>If your refered person refer someone they will be considered as 2nd Link and you will get 2% of their Income.</Text>
-<Text style={styles.DescriptionStyle}><Text style={{fontWeight:"bold"}}>3: </Text>You will only get comission from your 1st link and 2nd link no further links will be valuable for you.</Text>
+<Text style={styles.DescriptionStyle}><Text style={{fontWeight:"bold"}}>1: </Text>Direct Bonus          5%</Text>
+<Text style={styles.DescriptionStyle}><Text style={{fontWeight:"bold"}}>2: </Text>Network Bonus is earned on the income percentage of your refers
+</Text>
+<Text style={styles.DescriptionStyle}><Text style={{fontWeight:"bold"}}>3: </Text>Level 1                   5%.</Text>
 
-<Text style={styles.DescriptionStyle}><Text style={{fontWeight:"bold"}}>4: </Text>Please take note that you will start earning comission from your refered links after you reach Level 1</Text>
-<Text style={styles.DescriptionStyle}><Text style={{fontWeight:"bold"}}>5: </Text>Once total of your 10 refers invest in any package your level 1 will be unlocked and you will get <Text style={{color:Colors.PrimaryColor}}>3,000 Rs</Text> as reward.</Text>
-<Text style={styles.DescriptionStyle}><Text style={{fontWeight:"bold"}}>6: </Text>Once total of your 20 refers invest in any package your level 2 will be unlocked and you will get <Text style={{color:Colors.PrimaryColor}}>5,000 Rs</Text> as reward.</Text>
-<Text style={styles.DescriptionStyle}><Text style={{fontWeight:"bold"}}>7: </Text>Once total of your 30 refers invest in any package your level 3 will be unlocked and you will get <Text style={{color:Colors.PrimaryColor}}>8,000 Rs</Text> as reward.</Text>
-<Text style={styles.DescriptionStyle}><Text style={{fontWeight:"bold"}}>8: </Text>Once total of your 50 refers invest in any package your level 4 will be unlocked and you will get <Text style={{color:Colors.PrimaryColor}}>14,000 Rs</Text> as reward.</Text>
-<Text style={styles.DescriptionStyle}><Text style={{fontWeight:"bold"}}>9: </Text>Once total of your 80 refers invest in any package your level 5 will be unlocked and you will get <Text style={{color:Colors.PrimaryColor}}>20,000 Rs</Text> as reward.</Text>
+<Text style={styles.DescriptionStyle}><Text style={{fontWeight:"bold"}}>4: </Text>Level 2                   3%</Text>
+<Text style={styles.DescriptionStyle}><Text style={{fontWeight:"bold"}}>5: </Text>Level 3                   2%</Text>
+<Text style={styles.DescriptionStyle}><Text style={{fontWeight:"bold"}}>6: </Text>Level 4                   2%</Text>
+<Text style={styles.DescriptionStyle}><Text style={{fontWeight:"bold"}}>7: </Text>Level 5                   1%</Text>
+<Text style={styles.DescriptionStyle}><Text style={{fontWeight:"bold"}}>8: </Text>Level 6                   1%</Text>
 
 
 

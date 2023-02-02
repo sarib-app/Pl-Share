@@ -134,7 +134,7 @@ style={{width:100,height:100,borderRadius:10}}
 </View>
 <View style={{marginLeft:30}}>
 <Text style={styles.ModalTitles}>Level: <Text style={{color:Colors.PrimaryColor}}>{item.level}</Text></Text>
-<Text style={styles.ModalTitles}>Total Earning: <Text style={{color:Colors.PrimaryColor}}>PKR {item.balance}</Text></Text>
+<Text style={styles.ModalTitles}>Total Earning: <Text style={{color:Colors.PrimaryColor}}>USD {item.balance}</Text></Text>
 </View>
 
 </View>

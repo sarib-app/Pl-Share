@@ -13,7 +13,7 @@ import TrustWallet from '../../assets/icons/TrustWallet.png'
 
 import withdrawlIIicon from '../../assets/icons/withdrawII.png'
 import allIcon from '../../assets/icons/all.png'
-import depositicon from '../../assets/icons/depositII.png'
+import depositicon from '../../assets/icons/Recharge.png'
 import withdrawIcon from '../../assets/icons/withdraw.png'
 import Abouts_Us from '../../assets/icons/Abouts_Us.png'
 
@@ -137,8 +137,8 @@ const DepositMethod = [
     {
 
         id: 1,
-        Acc_Type: "Jazzcash",
-        Acc_SubType: 'Jazzcash',
+        Acc_Type: "Trust Wallet",
+        Acc_SubType: 'Trust Wallet',
         Image: TrustWallet,
         height:40,
         width:80
@@ -199,32 +199,32 @@ const TransactionIcons = [
         id: 1,
         icon: allIcon,
         name: "Investment",
-        width: 21,
-        height: 21
+        width: 31,
+        height: 34
     },
     {
 
         id: 2,
-        icon: withdrawIcon,
+        icon: withdrawlIIicon,
         name: "Income",
-        width: 27,
-        height: 27
+        width: 32,
+        height: 32
     },
     {
 
         id: 3,
-        icon: withdrawlIIicon,
+        icon: withdrawIcon,
         name: "Withdraw",
-        width: 23,
-        height: 25
+        width: 26,
+        height: 26
     },
     {
 
         id: 4,
         icon: depositicon,
         name: "Deposit",
-        width: 23,
-        height: 25
+        width: 27,
+        height: 27
     }
 ]
 
@@ -386,9 +386,9 @@ const ProfileOptions = [
         id: 1,
         icon: teams,
         rout_to: "MyTeam",
-        title: "My Team",
-        width:62,
-        height:36
+        title: "My Network",
+        width:55,
+        height:50
     },
 
     {
@@ -405,14 +405,14 @@ const ProfileOptions = [
         icon: privacy_icon,
         rout_to: "PrivacyPolicy",
         title: `Privacy${'\n'}Policy`,
-        width:41,
-        height:43
+        width:50,
+        height:53
     },
     {
         id: 4,
         icon: TeamComission,
         rout_to: "TeamComissionScreen",
-        title: `Team's${'\n'}Comission`,
+        title: `Netowrk${'\n'}Bonus`,
         width:51,
         height:57
     },

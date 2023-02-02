@@ -31,6 +31,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import SpinnerButton from 'react-native-spinner-button';
 import CountryCode from '../Register/CountryCodes';
 import { ButtonBig } from '../GlobalStyles/Buttons';
+import Download from '../Download/Download';
 function Login({
 
   onNavigate,
@@ -165,7 +166,7 @@ style={[GlobalStyles.TextInput,{borderColor:password === "" && loginPressed===tr
 
 <Image
 source={lock}
-style={{width:17,height:17,marginLeft:10  }}
+style={{width:17,height:21,marginLeft:10  }}
 />
 
 <TextInput

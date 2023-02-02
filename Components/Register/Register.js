@@ -37,6 +37,9 @@ import SpinnerButton from 'react-native-spinner-button';
 import CountryCode from './CountryCodes';
 import AccepDialogue from '../Help/AccepDialogue';
 import auth from '@react-native-firebase/auth';
+import { ButtonBig } from '../GlobalStyles/Buttons';
+import { Notifications } from 'react-native-notifications';
+
 
 
 
@@ -222,11 +225,18 @@ setLoading(false)
       AsyncStorage.setItem('token',result.token)
       //navigation.navigate('Main')
       onChangeState()
+      Notifications.postLocalNotification({
+        title: "Welcome",
+        body: "You have got $2 Joining bonus!",
+        extra: "data"
+    })
     }
     if(result.status === '401'){
       setLoading(false)
       Validator(result.error,result.message)
     }
+
+
 
       
     })
@@ -413,15 +423,12 @@ function RegisterBtn(){
     
     >
     
-    <ImageBackground 
-    source={longBtn}
-    style={GlobalStyles.Button}
-    
-    >
-    
-    <Text style={GlobalStyles.BtnText}>Register Now</Text>
-    
-    </ImageBackground>
+   
+<ButtonBig 
+title={"Register"}
+/>
+
+
     </Pressable>
     }
 
@@ -501,7 +508,7 @@ contentContainerStyle={{alignItems:'center'}}
   
 <Image
 source={refIcon}
-style={{width:17,height:17,margin:10}}
+style={{width:21,height:17,margin:10}}
 />
 <TextInput
 placeholder='Enter refer code here...'
@@ -529,7 +536,7 @@ style={{flex:1,color:"white"}}
   
 <Image
 source={typeIcon}
-style={{width:15,height:15,margin:10}}
+style={{width:19,height:19,margin:10}}
 />
 <TextInput
 placeholder='First name here'
@@ -547,7 +554,7 @@ style={{flex:1,color:"white"}}
   
 <Image
 source={typeIcon}
-style={{width:15,height:15,margin:10}}
+style={{width:19,height:19,margin:10}}
 />
 <TextInput
 placeholder='Last name here'
@@ -564,7 +571,7 @@ onChangeText={(e)=>setLastName(e)}
   
 <Image
 source={typeIcon}
-style={{width:15,height:15,margin:10}}
+style={{width:19,height:19,margin:10}}
 />
 <TextInput
 placeholder='Username here'
@@ -586,7 +593,7 @@ onChangeText={(e)=>setUserName(e)}
   
 <Image
 source={emailIcon}
-style={{width:16,height:11,margin:10}}
+style={{width:17,height:12,margin:10}}
 />
 <TextInput
 placeholder='Email here'
@@ -644,7 +651,7 @@ onChangeText={(e)=>setPhone(e)}
 
 <Image
 source={lockIcon}
-style={{width:17,height:17,margin:10}}
+style={{width:17,height:21,margin:10}}
 />
 <TextInput
 placeholder='Password'
@@ -665,7 +672,7 @@ onChangeText={(e)=>setPassword(e)}
 
 <Image
 source={lockIcon}
-style={{width:17,height:17,margin:10}}
+style={{width:17,height:21,margin:10}}
 />
 <TextInput
 placeholder='Confirm Password'
@@ -691,7 +698,7 @@ onChangeText={(e)=>setC_Password(e)}
 
 <Image
 source={typeIcon}
-style={{width:15,height:15,margin:10}}
+style={{width:19,height:19,margin:10}}
 />
 <TextInput
 placeholder='i.e. 3520XXX4X7XXX'
@@ -734,7 +741,7 @@ renderItem={({item})=>
   
 <Image
 source={typeIcon}
-style={{width:15,height:15,margin:10}}
+style={{width:19,height:19,margin:10}}
 />
 <TextInput
 placeholder='Enter Your Answer Please'

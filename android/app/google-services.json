@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "9886210252",
-    "project_id": "plshare-b4682",
-    "storage_bucket": "plshare-b4682.appspot.com"
+    "project_number": "695148771419",
+    "project_id": "plshare-df666",
+    "storage_bucket": "plshare-df666.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:9886210252:android:dd3e8a3727de74abc18a69",
+        "mobilesdk_app_id": "1:695148771419:android:b5fe1239971170fa6f677e",
         "android_client_info": {
           "package_name": "com.plshare"
         }
       },
       "oauth_client": [
         {
-          "client_id": "9886210252-nqmt9v6lmmolp8esqpvncde2846rtcmj.apps.googleusercontent.com",
+          "client_id": "695148771419-rfe18o7v8c6apemsnnqa0s89b7r3phcn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC7REVIMoJNL8H4vDGDbHv1taye_w8EaF4"
+          "current_key": "AIzaSyAncKeYk_2ErHjs3SKAmURmP2lApSUOmYA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "9886210252-nqmt9v6lmmolp8esqpvncde2846rtcmj.apps.googleusercontent.com",
+              "client_id": "695148771419-rfe18o7v8c6apemsnnqa0s89b7r3phcn.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -7,7 +7,7 @@ function ButtonBig({title}) {
     return(
         <LinearGradient 
 start={{x: -0.2, y: 1}} end={{x: 3, y: 7}}
-colors={[Colors.PrimaryColor, Colors.FontColorI, Colors.PrimaryColor]} 
+colors={[Colors.PrimaryColor, Colors.PrimaryColor, Colors.PrimaryColor]} 
 
 style={GlobalStyles.Button}>
   <Text style={GlobalStyles.BtnText}>

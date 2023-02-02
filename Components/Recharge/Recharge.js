@@ -33,7 +33,11 @@ import SpinnerButton from 'react-native-spinner-button';
 import Loader from '../Loader/Loader';
 import getAsync from '../GetAsynData/getAsync';
 import BackBtn from '../GlobalStyles/BackButton';
+import credited from '../../assets/icons/credited.png'
+import { useIsFocused } from '@react-navigation/native';
+
 function Recharge() {
+  const Focused = useIsFocused()
 const asyncdata = getAsync()
 const navigation = useNavigation()
 const [selected , setSelected]=useState(1)
@@ -46,8 +50,8 @@ const [balance,setBalance]=useState(0)
 
 
 
-const depositData = deposits.filter((item)=> item.status === value )
-
+// const depositData = deposits.filter((item)=> item.status === value )
+const depositData = deposits
 
 
 function onHideModal(){
@@ -93,8 +97,9 @@ renderItem={RenderDeposit}
 
 
 useEffect(()=>{
+  console.log("rendered")
   getAsyncData()
-  },[])
+  },[Focused])
 
 
   async function getAsyncData () {
@@ -149,15 +154,10 @@ function LowerCart(){
   
 
     function HistoryWrapperList({item}){
-      const PaymentIcon = item.account_type === "EasyPaisa" ? easypaissmall : 
-      item.account_type === "Jazzcash" ? JazzCashSmall: 
-      item.account_type === "Binance" ? BinanceSmall :
-      item.account_type === "VISA" ? VisaSmall:
-      item.account_type === "OKX" ? OkxSmall:easypaissmall
+      const PaymentIcon = credited
   
-  const imgStyle={width:
-  item.account_type === "VISA"?32:item.account_type === "OKX" ?32:27,
-  height:item.account_type === "VISA"?19:item.account_type === "OKX" ?8:27,
+  const imgStyle={width:21,
+  height:21,
   
   
   }
@@ -180,10 +180,12 @@ function LowerCart(){
       <Text style={GlobalStyles.ScndTxt}>{item.Idate}</Text>
   
       <Text style={[GlobalStyles.ScndTxt,{color:item.status === "approved"?Colors.send:Colors.danger}]}>{item.status}</Text>
+      <Text style={[GlobalStyles.ScndTxt,{color:Colors.FontColorI}]}>Tid: {item.transaction_id}</Text>
+
        </View>
     
     <View style={GlobalStyles.TransactionWrapper}>
-    <Text style={{color:"green"}}>+{item.amount}</Text>
+    <Text style={{color:Colors.send}}>+{item.amount}</Text>
     </View>
     
     
@@ -195,7 +197,7 @@ function LowerCart(){
       <>
       {
     depositData.length >=1 ?
-  depositData.map((item)=>{
+  depositData.sort((a,b)=> b.id -a.id).map((item)=>{
     return(
       <HistoryWrapperList item={item}/>
     )
@@ -211,7 +213,7 @@ function LowerCart(){
         <View style={styles.LowerCart}>
     <View style={styles.InnerlowCart}>
 <Text style={styles.TxtClr}>Activity</Text>
-<TouchableOpacity 
+{/* <TouchableOpacity 
 onPress={()=>setShowFilter(true)}
 style={styles.FilterWrap}>
 
@@ -219,7 +221,7 @@ style={styles.FilterWrap}>
 <Image source={filterIcon}
 style={{width:13,height:13}}
 />
-</TouchableOpacity>
+</TouchableOpacity> */}
     </View>
    
 <Text style={[styles.TxtClr,{margin:15}]}>Recent Deposit</Text>
@@ -265,8 +267,8 @@ nestedScrollEnabled={true}
 nestedScrollEnabled={true}
 >
 
-<Text style={{color:Colors.placeHolder,marginLeft:15}}>BALANCE</Text>
-<Text style={[styles.Text,{marginTop:5}]}>PKR {balance}</Text>
+<Text style={{color:Colors.placeHolder,marginLeft:15}}>Total</Text>
+<Text style={[styles.Text,{marginTop:5}]}>USD {balance}</Text>
 <Text style={{color:Colors.PrimaryColor,fontWeight:'600',marginLeft:15,marginTop:-10}}>Deposit Via</Text>
 
 <DepositMethodd />

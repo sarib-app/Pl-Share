@@ -125,7 +125,7 @@ style={{width:item.width,height:item.height,tintColor:Colors.FontColorI}}
   return(
 <View style={styles.UpperCart}>
 <Text style={styles.balanceTitle}>Total {selected}</Text>
-<Text style={styles.BalanceTxt}>PKR {selected === "Deposit"? total_Record !=""? total_Record.Total_deposit:0 : selected === "Income" ? total_Record !=""? totalIncome.toFixed(2):0 
+<Text style={styles.BalanceTxt}>USD {selected === "Deposit"? total_Record !=""? total_Record.Total_deposit:0 : selected === "Income" ? total_Record !=""? totalIncome.toFixed(2):0 
 : selected === "Withdraw" ? total_Record !=""? total_Record.Total_withdrawl:0 : total_Record !=""? total_Record.Total_investment:0}</Text>
 
 <View style={styles.LvlContainer}>
@@ -203,8 +203,8 @@ function LowerCart(){
   </View>
   
   
-  <Text style={[styles.TransactionText,{color:amountClr}]}>{operator}{selected === "Deposit"? item.amount : selected === "Income" ? Number(item.balance_got).toFixed(2) 
-: selected === "Withdraw" ? item.requested_amount : item.applied_price} PKR</Text>
+  <Text style={[styles.TransactionText,{color:amountClr}]}>{operator}{selected === "Deposit"? item.amount : selected === "Income" ? Number(item.amount)
+: selected === "Withdraw" ? item.requested_amount : item.amount} USD</Text>
   
   
   </View>

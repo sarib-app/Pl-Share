@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect,useCallback } from 'react';
 import {
 
   Text,
@@ -7,7 +7,10 @@ import {
 ScrollView,
 Pressable,
 TouchableOpacity,
-Dimensions
+Dimensions,
+RefreshControl,
+Share
+
 
  
 } from 'react-native';
@@ -25,7 +28,7 @@ import RechargeIcon from '../../assets/icons/Recharge.png'
 import withdrawIcon from '../../assets/icons/withdraw.png'
 import promotion from '../../assets/gif/promotion.gif'
 
-import helpIcon from '../../assets/icons/help.png'
+import helpIcon from '../../assets/icons/helpCenter.png'
 import jobsIcon from '../../assets/icons/jobs.png'
 import nftIcon from '../../assets/icons/nft.png'
 import tradeIcon from '../../assets/icons/trade.png'
@@ -61,13 +64,57 @@ const WindowWidth = Dimensions.get('window').width
 const WindowHeight = Dimensions.get('window').height
 
 
-function Home({data,total_Record}) {
+function Home({data,total_Record,forceReload}) {
 const [username,setUsername]=useState("username")
 const [isPromotion,setIspromotion]=useState("1")
 const [refer,setRefer]=useState("N/A")
 const [newNotifCount,setNewNotifCount]=useState("0")
 const [SuspendedMessage,setSuspendedMessage]=useState("hello there")
 const [isSuspended,setIsSuspended]=useState(false)
+const [refreshing, setRefreshing] = useState(false);
+
+
+
+
+
+const onRefresh = useCallback(() => {
+
+  forceReload()
+  setRefreshing(true)
+  setTimeout(() => {
+  setRefreshing(false)
+ 
+},2000);
+
+
+}, [])
+
+
+
+const onShare = async () => {
+
+  try {
+    const result = await Share.share({
+      message:
+        `Hey there click here to register on PLSHARE with my referal code URL https://registration.plshare.com/?${refer}`,
+    });
+
+    if (result.action === Share.sharedAction) {
+      if (result.activityType) {
+        // shared with activity type of result.activityType
+      } else {
+        // shared
+
+      }
+    } else if (result.action === Share.dismissedAction) {
+      // dismissed
+
+    }
+  } catch (error) {
+    alert(error.message);
+  }
+};
+
 
 const focused = useIsFocused()
 
@@ -173,7 +220,7 @@ setShowComingSoon((P)=> !P)
 
 <View style={[styles.UpperCart,{marginBottom:isPromotion != "0" ? 25 :0}]}>
 <Text style={styles.balanceTitle}>Total Balance</Text>
-<Text style={styles.BalanceTxt}>PKR {totalBalance.toFixed(2)}</Text>
+<Text style={styles.BalanceTxt}>USD {totalBalance.toFixed(2)}</Text>
 
 <View style={styles.LvlContainer}>
 <Text style={styles.LvlTxt}>Level <Text style={styles.LvlinnerTxt}>{total_Record.my_level}</Text></Text>
@@ -213,12 +260,12 @@ style={styles.CatIcon}>
 
 <Image 
 source={RechargeIcon}
-style={{width:20,height:30,tintColor:Colors.FontColorI}}
+style={{width:40,height:30,tintColor:Colors.FontColorI}}
 />
 
 
 </LinearGradient>
-<Text style={{color:"white"}}>Recharge</Text>
+<Text style={{color:"white"}}>Deposit</Text>
 </Pressable>
 
 
@@ -254,7 +301,7 @@ style={styles.CatIcon}>
 
 <Image 
 source={withdrawIcon}
-style={{width:27,height:27,tintColor:Colors.FontColorI}}
+style={{width:30,height:30,tintColor:Colors.FontColorI}}
 
 />
 
@@ -280,7 +327,7 @@ style={styles.CatIcon}>
 
 <Image 
 source={plansIcon}
-style={{width:27,height:27,tintColor:Colors.FontColorI}}
+style={{width:35,height:35,tintColor:Colors.FontColorI}}
 
 />
 
@@ -295,7 +342,7 @@ style={{width:27,height:27,tintColor:Colors.FontColorI}}
 
 
 <Pressable 
-onPress={()=> navigation.navigate('Decider')}
+onPress={()=> navigation.navigate('Help')}
 style={styles.iconWrapper}>
 <LinearGradient 
  colors={[Colors.bgIv, Colors.bgIv]}
@@ -305,7 +352,7 @@ style={styles.CatIcon}>
 
 <Image 
 source={helpIcon}
-style={{width:27,height:27,tintColor:Colors.FontColorI}}
+style={{width:30,height:30,tintColor:Colors.FontColorI}}
 
 />
 
@@ -318,7 +365,7 @@ style={{width:27,height:27,tintColor:Colors.FontColorI}}
 
 
 
-
+{/* 
 <Pressable 
 onPress={()=> setShowComingSoon(true)}
 style={styles.iconWrapper}>
@@ -330,19 +377,19 @@ style={styles.CatIcon}>
 
 <Image 
 source={jobsIcon}
-style={{width:28,height:23,tintColor:Colors.FontColorI}}
+style={{width:33,height:32,tintColor:Colors.FontColorI}}
 
 />
 
 
 </LinearGradient>
 <Text style={{color:"white"}}>Jobs</Text>
-</Pressable>
+</Pressable> */}
 
 
 
 
-
+{/* 
 <Pressable 
 onPress={()=> setShowComingSoon(true)}
 
@@ -362,7 +409,7 @@ style={{width:30,height:24,tintColor:Colors.FontColorI}}
 
 </LinearGradient>
 <Text style={{color:"white"}}>Games</Text>
-</Pressable>
+</Pressable> */}
 
 
 
@@ -379,7 +426,7 @@ style={styles.CatIcon}>
 
 <Image 
 source={shopIcon}
-style={{width:29,height:25,tintColor:Colors.FontColorI}}
+style={{width:33,height:30,tintColor:Colors.FontColorI}}
 
 />
 
@@ -390,7 +437,7 @@ style={{width:29,height:25,tintColor:Colors.FontColorI}}
 
 
 
-
+{/* 
 <Pressable 
 onPress={()=> setShowComingSoon(true)}
 
@@ -438,14 +485,14 @@ style={{width:30,height:28,tintColor:Colors.FontColorI}}
 
 </LinearGradient>
 <Text style={{color:"white"}}>NFT</Text>
-</Pressable>
+</Pressable> */}
 </ScrollView>
 </View>
 
-{/* <Coming_Soon 
+<Coming_Soon 
 IsVisible={showComingSoon}
 onHideModal={onHideComingsoon}
-/> */}
+/>
 </View>
 
   )
@@ -526,17 +573,20 @@ return(
   
   <Text style={styles.L_Cart_Title}>Promotion</Text>
 
-  <View style={{backgroundColor: Colors.bgIv,alignSelf:'center',width:WindowWidth/1.1,borderRadius:8,shadowColor:Colors.BgColor,elevation:10,alignItems:"center",height:WindowHeight/8,flexDirection:'row'}}>
+  <Pressable 
+  
+  onPress={()=> navigation.navigate("PromotionScreen")}
+  style={{backgroundColor: Colors.bgIv,alignSelf:'center',width:WindowWidth/1.1,borderRadius:8,shadowColor:Colors.BgColor,elevation:10,alignItems:"center",height:WindowHeight/8,flexDirection:'row'}}>
        
   <Image source={{uri:"https://img.icons8.com/arcade/64/null/packaging.png"}} style={{width:50,height:50,marginLeft:10}}/>
   <View >
   <Text style={styles.PromotionTitleTxt}>Congratulations!</Text>
 <Text style={{textAlign:'left',marginLeft:10,color:Colors.FontColorII}}>
-You have sucessfully recieved 2$ {'\n'} as your registration reward ! {'\n'}
-Now click here and claim more free 5$ 
+You have sucessfully recieved <Text style={{color:Colors.send,fontWeight:'bold'}}>2$</Text> {'\n'} as your registration <Text style={{color:Colors.send}}>reward !</Text> {'\n'}
+Now click here and claim more free <Text style={{color:Colors.send,fontWeight:'bold'}}>5$</Text>
 </Text>
   </View>
-      </View>
+      </Pressable>
 
 {/*   
   <View style={styles.lowerProfilesCart}>
@@ -551,7 +601,7 @@ scrollEnabled={true}
 
 </View> */}
 
-<Text style={[styles.L_Cart_Title,{marginTop:10}]}>Tips & Tricks</Text>
+<Text style={[styles.L_Cart_Title,{marginTop:10}]}>Tutorials</Text>
 
 <ScrollView
 showsVerticalScrollIndicator={false}
@@ -589,14 +639,16 @@ data.map((item)=>{
 
 
 <View style={styles.Header}>
-    <Text style={styles.OuterTxt}>Weclcome{'\n'} <Text style={styles.InnerTxt}>{username}<Text style={{color:Colors.placeHolder,fontSize:14}}>  {`( ${refer} )`}</Text></Text></Text>
+    <Text 
+    onPress={()=> onShare()}
+    style={styles.OuterTxt}>Weclcome{'\n'} <Text style={styles.InnerTxt}>{username}<Text style={{color:Colors.placeHolder,fontSize:14,textDecorationLine:"underline"}}>  {`( ${refer} )`}</Text></Text></Text>
 
     <View style={{flexDirection:'row'}}>
       <View style={{flexDirection:'row' }}>
-        <View style={{backgroundColor:Colors.deposit,borderRadius:1000,width:20,height:20,alignItems:"center",justifyContent:"center",left:10}}>
+          <View style={{backgroundColor:Colors.deposit,borderRadius:1000,width:20,height:20,alignItems:"center",justifyContent:"center",left:10}}>
 
-<Text style={{color:"white",fontWeight:"bold"}} >{newNotifCount}</Text>
-        </View>
+  <Text style={{color:"white",fontWeight:"bold"}} >{newNotifCount}</Text>
+          </View>
         {/* {
 newNotif === "1" &&
 
@@ -631,13 +683,13 @@ newNotif === "1" &&
     <Image source={notification} style={{width:35,height:35,tintColor:Colors.PrimaryColor}}/>
 </TouchableOpacity>
   </View>
- 
+{/*  
   <TouchableOpacity
   onPress={()=> navigation.navigate("LevelRewards")}
   >
 
    <Image source={{uri:"https://img.icons8.com/glyph-neue/64/null/packaging.png"}} style={{width:35,height:35,tintColor:Colors.PrimaryColor}}/>
-  </TouchableOpacity>
+  </TouchableOpacity> */}
   
 
   </View>
@@ -658,7 +710,15 @@ newNotif === "1" &&
       /> */}
       </View>
 <ScrollView nestedScrollEnabled={true}
+ refreshControl={
+  <RefreshControl
+  refreshing={refreshing}
+  onRefresh={onRefresh}
+  
 
+
+  />
+}
 >
 
 
@@ -705,6 +765,7 @@ style={{ width:320,
 <LowerCart/>
 
 </ScrollView>
+
 {/* <Pressable
 onPress={()=> navigation.navigate("PromotionScreen")}
 style={{right:0,top:100,position:'absolute'}}>

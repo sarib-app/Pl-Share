@@ -24,7 +24,8 @@ function Confirmation({
   onHideModal,
   selectedPackage,
   user,
-  currentDate
+  currentDate,
+  isInvested
 
 }) {
 
@@ -37,25 +38,31 @@ function onHideLoader(){
   
   setshowProgressLoader((p)=>!p)
 }
-function InvestOnpackage(){
+function InvestOnpackage(val){
   setshowProgressLoader(true)
 
-  const newDate = moment(currentDate, "YYYY-MM-DD").add(Number(selectedPackage.cycle_duration),"days");
 
-
-console.log(selectedPackage.id,newDate.format('YYYY-MM-DD'),user.id,selectedPackage.single_payment)
+const Endpoint_val = val === "Invest"?Endpoints.AddInvestment:Endpoints.UpgradeInvestment
 
 
 
 
       var formdata = new FormData();
+
+
+
+
+
+
+      formdata.append("user_id",  user.id);
       formdata.append("package_id", selectedPackage.id);
-      formdata.append("user_id", user.id);
-      formdata.append("end_date", newDate.format('YYYY-MM-DD'));
-      formdata.append("single_earning",String(selectedPackage.single_payment));
-      formdata.append("applied_income",String(selectedPackage.cycle_income));
-      formdata.append("applied_price",String(selectedPackage.price));
-      formdata.append("days", String(selectedPackage.cycle_duration));
+      formdata.append("daily_income", selectedPackage.daily_profits);
+      formdata.append("package_name",selectedPackage.package_name);
+      formdata.append("amount", selectedPackage.amount);
+
+
+
+
 
       var requestOptions = {
         method: 'POST',
@@ -63,7 +70,7 @@ console.log(selectedPackage.id,newDate.format('YYYY-MM-DD'),user.id,selectedPack
         redirect: 'follow'
       };
       
-      fetch(`${BaseUrl}${Endpoints.AddInvestment}`, requestOptions)
+      fetch(`${BaseUrl}${Endpoint_val}`, requestOptions)
         .then(response => response.json())
         .then(result => {
           console.log(result)
@@ -93,6 +100,9 @@ console.log(selectedPackage.id,newDate.format('YYYY-MM-DD'),user.id,selectedPack
 }
 
 
+
+
+
 return (
     <Modal
     visible={IsVisible}
@@ -114,22 +124,26 @@ style={styles.ModalTitles}>Close</Text>
 <View style={[styles.InnerModalHeader,{borderColor:Colors.placeHolder,borderRightWidth:1}]}>
 <Text style={styles.ModalTXt}>Package Id</Text>
 <Text style={styles.ModalTXt}>Package</Text>
-<Text style={styles.ModalTXt}>Profit</Text>
+<Text style={styles.ModalTXt}>Daily Profit</Text>
+<Text style={styles.ModalTXt}>Daily Profit %</Text>
+
 <Text style={styles.ModalTXt}>Price</Text>
-<Text style={styles.ModalTXt}>Profit Duration</Text>
-<Text style={styles.ModalTXt}>Income Cycle</Text>
-<Text style={styles.ModalTXt}>Income per day</Text>
+<Text style={styles.ModalTXt}>Working days</Text>
+
+
 
 
 </View>
 <View style={styles.InnerModalHeader}>
 <Text style={styles.ModalTXt}>{selectedPackage.id}</Text>
-<Text style={styles.ModalTXt}>{selectedPackage.title}</Text>
-<Text style={styles.ModalTXt}>{selectedPackage.profit_income}</Text>
-<Text style={styles.ModalTXt}>{selectedPackage.price}</Text>
-<Text style={styles.ModalTXt}>{selectedPackage.profit_duration}</Text>
-<Text style={styles.ModalTXt}>{selectedPackage.cycle_duration}</Text>
-<Text style={styles.ModalTXt}>{selectedPackage.single_payment}</Text>
+<Text style={styles.ModalTXt}>{selectedPackage.package_name}</Text>
+<Text style={styles.ModalTXt}>{selectedPackage.daily_profits} USD</Text>
+<Text style={styles.ModalTXt}>{selectedPackage.daily_percentage}%</Text>
+
+<Text style={styles.ModalTXt}>{selectedPackage.amount}</Text>
+<Text style={styles.ModalTXt}>{selectedPackage.working_days}</Text>
+
+
 
 </View>
 </View>
@@ -143,7 +157,7 @@ style={styles.ModalTitles}>Close</Text>
 
   <Text 
   onPress={()=>  {
-    InvestOnpackage()
+    InvestOnpackage(isInvested===false?"Invest":"Upgrade")
     // setshowProgressLoader(true)
   
   }}

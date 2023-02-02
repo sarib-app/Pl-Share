@@ -145,7 +145,7 @@ return (
     <SafeAreaView style={styles.Container}>
 <BackBtn/>
 <Text style={styles.HeaderText}>
-    Direct Balance
+    Notifications
 </Text>
 
 {/* <View style={styles.TrickContainer}>

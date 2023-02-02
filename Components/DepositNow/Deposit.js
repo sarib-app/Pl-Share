@@ -36,6 +36,7 @@ import * as ImagePicker from 'react-native-image-picker';
 import getAsync from '../GetAsynData/getAsync';
 import SpinnerButton from 'react-native-spinner-button';
 import BankAllList from '../BankAllList/BankAllList';
+import { ButtonBig } from '../GlobalStyles/Buttons';
 const WindowHeight = Dimensions.get('window').height; 
 
 
@@ -51,10 +52,10 @@ const WindowHeight = Dimensions.get('window').height;
 function DepositScreen({route}) {
 const asyncData = getAsync()
   const item = route.params.item
-  const [Acc_Title,setAcc_title]=useState(item.Acc_Type === "OKX" || item.Acc_Type === "Binance"? item.Acc_Type:"")
-const [Acc_Number,setAcc_Number]=useState(item.Acc_Type === "OKX" || item.Acc_Type === "Binance"? "N/A":"")
+  const [Acc_Title,setAcc_title]=useState("")
+const [Acc_Number,setAcc_Number]=useState("")
 const [Acc_Type,setAcc_Type]=useState(item.Acc_Type)
-const [Account_Subtype,setAcc_SubType]=useState(item.Acc_Type === "VISA" ? "": item.Acc_Type === "OKX" || item.Acc_Type === "Binance"?"USDT TRON (TRC 20)":item.Acc_Type)
+const [Account_Subtype,setAcc_SubType]=useState("Tither (USD)")
 const [ProofImage,setProofImage]=useState()
 const [ProofImageTemp,setProofImageTemp]=useState()
 
@@ -62,11 +63,11 @@ const [Amount,setAmount]=useState()
 const [isPressed,setIsPressed]=useState(false)
 const [loading,setLoading]=useState(false)
 const [showBanks,setShowBank]=useState(false)
-const [getMethods,setMethods]=useState()
+const [getMethods,setMethods]=useState("")
 
 function onDeposit(){
   
-   if(Acc_Title !=""&& Acc_Number !=""&& Acc_Type && Account_Subtype && Amount && ProofImageTemp ){
+   if( Acc_Number !=""&& Acc_Type && Account_Subtype && Amount && ProofImageTemp ){
     // setLoading(true)
 DepositCall()
    }else{ 
@@ -105,15 +106,15 @@ getBanks()
 
 function getBanks(){
   var requestOptions = {
-    method: 'GET',
+    method: 'POST',
     redirect: 'follow'
   };
   
-  fetch("https://apis.tradingtube.net/api/fetch_payment", requestOptions)
+  fetch(`${BaseUrl}fetch_payment_address`, requestOptions)
     .then(response => response.json())
     .then(result => {
       if(result.status === "200"){
-        setMethods(result.Data[0])
+        setMethods(result.data)
       }
       console.log(result)})
     .catch(error => console.log('error', error));
@@ -183,7 +184,10 @@ alert("Download started please wait")
 
   })
  }
+
+ console.log('id',asyncData.user.id)
 function DepositCall (){
+  
 setLoading(true)
   const uri =
   Platform.OS === "android"
@@ -201,8 +205,12 @@ console.log(uri+ "  " + ext + "  " + type )
   var formdata = new FormData();
   formdata.append("payer_id", asyncData.user.id);
   formdata.append("account_type", Acc_Type);
-  formdata.append("account_title", Acc_Title);
-  formdata.append("account_no",Acc_Number);
+  formdata.append("wallet_type", Account_Subtype);
+
+  formdata.append("transaction_id",Acc_Number);
+  formdata.append("status","unapproved");
+  formdata.append("verified","false");
+
   formdata.append("amount", Amount);
   // formdata.append("proof_image", fileInput.files[0], "[PROXY]");
 
@@ -212,7 +220,6 @@ console.log(uri+ "  " + ext + "  " + type )
     type:type,
   } );
 
-  formdata.append("account_subtype", Account_Subtype);
   
   var requestOptions = {
     method: 'POST',
@@ -220,20 +227,20 @@ console.log(uri+ "  " + ext + "  " + type )
     redirect: 'follow'
   }; 
   
-  fetch(`${BaseUrl}addDeposit`, requestOptions)
+  fetch(`${BaseUrl}adddeposit`, requestOptions)
     .then(response => response.json())
     .then(result =>{
       console.log(result)
       if(result.status === "200"){
         setLoading(false)
-        Alert.alert("Congratulations")
+        Alert.alert("Congratulations","Your request has been generated successfully!")
         console.log(result)
         navigation.navigate("Main")
       }
     else if(result.status==="401"){
         setLoading(false)
         console.log(result.data[0].message)
-        Alert,alert(result.data[0].message)
+        Alert.alert(result.data[0].message)
       }
     })
     .catch(error => {
@@ -317,21 +324,44 @@ const navigation = useNavigation()
 <ScrollView>
 
 <Cardd
-item={item}
-methods={getMethods}
-type={item.Acc_Type}
+getMethods={getMethods}
 />
-{
-  item.Acc_Type === "Binance" ||   item.Acc_Type === "OKX" ? 
+
 <>
 
 
 
 
+<Text style={styles.TxtInputTitle}>
+  Transaction ID
+</Text>
+<View
+style={[GlobalStyles.TextInput,{borderColor: Acc_Number ===""&&isPressed === true ? Colors.danger:Colors.BgColorII}]}
+>
+
+<Image
+source={acc_numb_icon}
+style={{width:27,height:20,marginLeft:10,tintColor:Colors.PrimaryColor  }}
+/>
+
+<TextInput
+placeholder='Enter Transaction ID'
+value={Acc_Number}
+// keyboardType={'numeric'}
+
+onChangeText={(e)=> setAcc_Number(e)}
+placeholderTextColor={Colors.placeHolder}
+style={{flex:1,color:Colors.FontColorI,marginLeft:10}}
+cursorColor={Colors.PrimaryColor}
+// secureTextEntry={true}
+
+/>
+
+</View>
 
 
 <Text style={styles.TxtInputTitle}>
-  Account Type
+  Vault Type
 </Text>
 <View
 style={[GlobalStyles.TextInput,{borderColor: !Acc_Type&&isPressed === true ? Colors.danger:Colors.BgColorII}]}
@@ -339,7 +369,7 @@ style={[GlobalStyles.TextInput,{borderColor: !Acc_Type&&isPressed === true ? Col
 
 <Image
 source={acc_type_icon}
-style={{width:24,height:19,marginLeft:10  }}
+style={{width:24,height:19,marginLeft:10,tintColor:Colors.PrimaryColor  }}
 />
 
 <TextInput
@@ -372,7 +402,7 @@ style={[GlobalStyles.TextInput,{borderColor: !Account_Subtype &&isPressed === tr
 
 <Image
 source={acc_type_icon}
-style={{width:24,height:19,marginLeft:10  }}
+style={{width:24,height:19,marginLeft:10,tintColor:Colors.PrimaryColor  }}
 />
 
 <TextInput
@@ -400,7 +430,7 @@ style={[GlobalStyles.TextInput,{borderColor: !Amount &&isPressed === true ? Colo
 
 <Image
 source={amount_icon}
-style={{width:22,height:24,marginLeft:10  }}
+style={{width:22,height:24,marginLeft:10 ,tintColor:Colors.PrimaryColor }}
 />
 
 <TextInput
@@ -423,7 +453,7 @@ cursorColor={Colors.PrimaryColor}
 
 
 <Text style={styles.TxtInputTitle}>
- Upload Invoice Image
+  Invoice Image
 </Text>
 <Pressable
 onPress={()=>permissionForGallery()}
@@ -448,251 +478,24 @@ style={{width:115,height:104,marginLeft:10  }}
 </Pressable>
 
 </>
-:
-<>
-<Text style={styles.TxtInputTitle}>
-  Account Title
-</Text>
-<View
-style={[GlobalStyles.TextInput,{borderColor: !Acc_Title &&isPressed === true ? Colors.danger:Colors.BgColorII}]}
->
 
-<Image
-source={title_icon}
-style={{width:23,height:21,marginLeft:10  }}
-/>
-
-<TextInput
-placeholder='Enter Account Title'
-value={Acc_Title}
-onChangeText={(e)=> setAcc_title(e)}
-
-placeholderTextColor={Colors.placeHolder}
-style={{flex:1,color:Colors.FontColorI,marginLeft:10}}
-cursorColor={Colors.PrimaryColor}
-// secureTextEntry={true}
-/>
-
-</View>
-
-
-
-<Text style={styles.TxtInputTitle}>
-  Account Number
-</Text>
-<View
-style={[GlobalStyles.TextInput,{borderColor: Acc_Number ===""&&isPressed === true ? Colors.danger:Colors.BgColorII}]}
->
-
-<Image
-source={acc_numb_icon}
-style={{width:27,height:20,marginLeft:10  }}
-/>
-
-<TextInput
-placeholder='Enter Account Number'
-value={Acc_Number}
-keyboardType={'numeric'}
-
-onChangeText={(e)=> setAcc_Number(e)}
-placeholderTextColor={Colors.placeHolder}
-style={{flex:1,color:Colors.FontColorI,marginLeft:10}}
-cursorColor={Colors.PrimaryColor}
-// secureTextEntry={true}
-
-/>
-
-</View>
-
-
-
-
-
-
-
-
-
-
-
-
-<Text style={styles.TxtInputTitle}>
-  Account Type
-</Text>
-<View
-style={[GlobalStyles.TextInput,{borderColor: !Acc_Type&&isPressed === true ? Colors.danger:Colors.BgColorII}]}
->
-
-<Image
-source={acc_type_icon}
-style={{width:24,height:19,marginLeft:10  }}
-/>
-
-<TextInput
-placeholder='Enter Account Type'
-value={Acc_Type}
-// onChangeText={(e)=> setAcc_Type(e)}
-placeholderTextColor={Colors.placeHolder}
-style={{flex:1,color:Colors.FontColorI,marginLeft:10}}
-cursorColor={Colors.PrimaryColor}
-// secureTextEntry={true}
-editable={false}
-
-/>
-
-</View>
-
-
-
-
-
-
-<Text style={styles.TxtInputTitle}>
-  Account Sub-Type
-</Text>
-
-
-
-
-
-
-
-
-{
-  item.Acc_Type != "VISA" ?
-
-<View
-style={[GlobalStyles.TextInput,{borderColor: !Account_Subtype &&isPressed === true ? Colors.danger:Colors.BgColorII}]}
->
-
-<Image
-source={acc_type_icon}
-style={{width:24,height:19,marginLeft:10  }}
-/>
-
-<TextInput
-placeholder='Enter Account Sub-Type'
-value={Account_Subtype}
-// onChangeText={(e)=> setAcc_SubType(e)}
-placeholderTextColor={Colors.placeHolder}
-style={{flex:1,color:Colors.FontColorI,marginLeft:10}}
-cursorColor={Colors.PrimaryColor}
-editable={false}
-// secureTextEntry={true}
-
-/>
-
-</View>
-
-:
-<Pressable
-onPress={()=> setShowBank(true)}
-style={[GlobalStyles.TextInput,{borderColor: !Account_Subtype &&isPressed === true ? Colors.danger:Colors.BgColorII}]}
->
-
-<Image
-source={acc_type_icon}
-style={{width:24,height:19,marginLeft:10  }}
-/>
-
-<TextInput
-placeholder='Please Select Basank SubType'
-value={Account_Subtype}
-// onChangeText={(e)=> setAcc_SubType(e)}
-placeholderTextColor={Colors.placeHolder}
-style={{flex:1,color:Colors.FontColorI,marginLeft:10}}
-cursorColor={Colors.PrimaryColor}
-editable={false}
-// secureTextEntry={true}
-/>
-
-</Pressable>
-
-
-}
-
-
-
-
-
-
-
-
-
-<Text style={styles.TxtInputTitle}>
-  Amount
-</Text>
-<View
-style={[GlobalStyles.TextInput,{borderColor: !Amount &&isPressed === true ? Colors.danger:Colors.BgColorII}]}
->
-
-<Image
-source={amount_icon}
-style={{width:22,height:24,marginLeft:10  }}
-/>
-
-<TextInput
-placeholder='Enter Amount'
-value={Amount}
-keyboardType={'numeric'}
-
-onChangeText={(e)=> setAmount(e)}
-placeholderTextColor={Colors.placeHolder}
-style={{flex:1,color:Colors.FontColorI,marginLeft:10}}
-cursorColor={Colors.PrimaryColor}
-// secureTextEntry={true}
-
-/>
-
-</View>
-
-
-
-
-
-<Text style={styles.TxtInputTitle}>
- Upload Invoice Image
-</Text>
-<Pressable
-onPress={()=>permissionForGallery()}
-style={[GlobalStyles.TextInput,{borderColor: !ProofImageTemp &&isPressed === true ? Colors.danger:Colors.BgColorII
-
-,justifyContent:"center",alignItems:'center',height:WindowHeight/4
-}]}
->
-{
-  ProofImageTemp? <Image
-  source={{uri:ProofImageTemp}}
-  style={{width:300,height:150,marginLeft:10  }}
-  />:
-  <Image
-source={upload_img_icon}
-style={{width:115,height:104,marginLeft:10  }}
-/>
-}
-
-
-
-</Pressable>
-
-</>
-}
 
 {loading===false?
 
 
 <Pressable 
 onPress={()=> onDeposit()}
+style={{alignSelf:"center"}}
+// style={GlobalStyles.DullBtn}
 >
 
-<ImageBackground 
-source={Button}
-style={[GlobalStyles.Button,{alignSelf:'center'}]}
 
->
 
-<Text style={GlobalStyles.BtnText}>Deposit Now</Text>
+<ButtonBig
+title={"Deposit Now"}
+/>
 
-</ImageBackground>
+
 </Pressable>
 :
 <SpinnerButton
@@ -708,12 +511,7 @@ style={[GlobalStyles.Button,{alignSelf:'center'}]}
 
 <View style={{width:50,height:100}}></View>
 </ScrollView>
-<BankAllList 
-    isVisible={showBanks}
-    onSelectBank={onSelectBank}
-    route={item.Acc_Type}
-
-/>
+ 
     </SafeAreaView>
   )
 }

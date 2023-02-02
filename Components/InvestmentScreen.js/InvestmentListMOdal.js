@@ -18,7 +18,6 @@ import styles from './Styles';
 
 
 
-
 import { SafeAreaView } from 'react-native-safe-area-context';
 import gobackIcon from '../../assets/icons/gobackIcon.png'
 
@@ -32,6 +31,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import credited from '../../assets/icons/credited.png'
 import debited from '../../assets/icons/debited.png'
 import Button from './../../assets/icons/smallBtn.png'
+import logo from './../../assets/icons/logo.png'
+
 import GlobalStyles from '../GlobalStyles/GlobalStyles';
 
 import {INvestmentList,DepositTransaction} from '../data/TopInvestors';
@@ -44,7 +45,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
-function InvestmentListMOdal({isShow,onSelect,currentDate,dataFinal}) {
+function InvestmentListMOdal({isShow,onSelect,currentDate,dataFinal,isInvested}) {
+  const asyncdata = getAsync()
 
     function InvestmentLists ({item}){
         const [showConfirmation,setShowConfirmation]=useState(false)
@@ -52,6 +54,8 @@ function InvestmentListMOdal({isShow,onSelect,currentDate,dataFinal}) {
         
   function onHideModal(){
     setShowConfirmation((p)=>!p)
+    // onSelect()
+
   }
   
   
@@ -64,16 +68,16 @@ function InvestmentListMOdal({isShow,onSelect,currentDate,dataFinal}) {
    
         <Image 
         style={{width:49,height:49}} 
-        source={{uri:Endpoints.ImageBaseUrl+item.image}}
+        source={logo}
         borderRadius={1000}
         />
         
         <View style={styles.InnerTricks}>
-        <Text style={{fontWeight:'bold',fontSize:18,color:Colors.FontColorI}}>{item.title}</Text>
+        {/* <Text style={{fontWeight:'bold',fontSize:18,color:Colors.FontColorI}}>{item.title}</Text> */}
         {/* <Text>please see the video.. below.......</Text> */}
        
-          <Text style={styles.ListingText}>Status: <Text style={{color:Colors.send}}>{item.status}</Text></Text>
-          <Text style={styles.ListingText}>Price: <Text style={{color:Colors.deposit}}>{item.price}</Text></Text>
+          <Text style={styles.ListingText}>Name: <Text style={{color:Colors.send}}>{item.package_name}</Text></Text>
+          <Text style={styles.ListingText}>Price: <Text style={{color:Colors.deposit}}>{item.amount}</Text></Text>
   
          
         </View>
@@ -97,37 +101,15 @@ function InvestmentListMOdal({isShow,onSelect,currentDate,dataFinal}) {
   
   <View style={{alignItems:"center"}}>
       <Text style={styles.ListingTitle}>
-      Profit
+      Daily Profit
       </Text>
-      <Text style={styles.ListingText}>{ item.profit_income}</Text>
+      <Text style={styles.ListingText}>{ item.daily_profits} USD</Text>
   </View>
   <View style={{alignItems:"center"}}>
       <Text style={styles.ListingTitle}>
       Price
       </Text>
-      <Text style={styles.ListingText}>{item.price}</Text>
-  </View>
-  <View style={{alignItems:"center"}}>
-      <Text style={styles.ListingTitle}>
-      Duration
-      </Text>
-      <Text style={styles.ListingText}>{item.profit_duration}</Text>
-  </View>
-  
-     </View>
-  
-  
-     <View style={styles.ListingRow}>
-  
-  <View style={{alignItems:"center"}}>
-      <Text style={styles.ListingTitle}>
-      Status
-      </Text>
-      
-    
-        <Text style={styles.ListingText}>{item.status}</Text>
-       
-      
+      <Text style={styles.ListingText}>{item.amount}</Text>
   </View>
   <View style={{alignItems:"center"}}>
       <Text style={styles.ListingTitle}>
@@ -135,37 +117,54 @@ function InvestmentListMOdal({isShow,onSelect,currentDate,dataFinal}) {
       </Text>
       <Text style={styles.ListingText}>{ item.id}</Text>
   </View>
+     </View>
+  
+  
+     <View style={styles.ListingRow}>
+  
   <View style={{alignItems:"center"}}>
       <Text style={styles.ListingTitle}>
-      Income Cycle
+      Name
       </Text>
-      <Text style={styles.ListingText}>{item.cycle_duration}</Text>
+      
+    
+        <Text style={styles.ListingText}>{item.package_name}</Text>
+       
+      
+  </View>
+ 
+
+  <View style={{alignItems:"center"}}>
+      <Text style={styles.ListingTitle}>
+      Porductive Duration
+      </Text>
+      <Text style={styles.ListingText}>{item.working_days}</Text>
+  </View>
+  <View style={{alignItems:"center"}}>
+      <Text style={styles.ListingTitle}>
+      Level
+      </Text>
+      <Text style={styles.ListingText}>{item.levels}</Text>
   </View>
   
      </View>
   
   
-  {
-    item.status === "active"?
+ 
      <TouchableOpacity 
   onPress={()=> {
     // setSelectedPackage(item)
   setShowConfirmation(true)
   
   }}
+  style={[GlobalStyles.DullBtn,{marginTop:10}]}
   >
   
-  <ImageBackground 
-  source={Button}
-  style={{alignSelf:'center',width:109,height:30,alignItems:'center'}}
+ 
+  <Text style={[GlobalStyles.BtnText,{color:Colors.FontColorI}]}>{isInvested === false ?"Invest":"Upgrade To"}</Text>
+
+  </TouchableOpacity>   
   
-  >
-  
-  <Text style={GlobalStyles.BtnText}>Invest</Text>
-  
-  </ImageBackground>
-  </TouchableOpacity>   : null
-  }
   
   {
     showConfirmation === true &&
@@ -175,6 +174,7 @@ function InvestmentListMOdal({isShow,onSelect,currentDate,dataFinal}) {
   selectedPackage={item}
   user={asyncdata.user}
   currentDate={currentDate}
+  isInvested={isInvested}
   />
   
   }

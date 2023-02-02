@@ -421,7 +421,7 @@ style={[GlobalStyles.TextInput,{borderColor: !Old_Password &&isPressed === true 
 
 <Image
 source={lock}
-style={{width:17,height:17,marginLeft:10  }}
+style={{width:17,height:19,marginLeft:10  }}
 />
 
 <TextInput
@@ -450,7 +450,7 @@ style={[GlobalStyles.TextInput,{borderColor: !NewPassword &&isPressed === true ?
 
 <Image
 source={lock}
-style={{width:17,height:17,marginLeft:10  }}
+style={{width:17,height:19,marginLeft:10  }}
 />
 
 <TextInput
@@ -479,17 +479,14 @@ cursorColor={Colors.PrimaryColor}
 
 <Pressable 
 onPress={()=> onUpdate()}
+style={[GlobalStyles.DullBtn,{marginTop:10,borderColor:Colors.PrimaryColor,borderWidth:1}]}
 >
 
-<ImageBackground 
-source={Button}
-style={[GlobalStyles.Button,{alignSelf:'center'}]}
 
->
 
 <Text style={GlobalStyles.BtnText}>Update</Text>
 
-</ImageBackground>
+
 </Pressable>
 :
 <SpinnerButton

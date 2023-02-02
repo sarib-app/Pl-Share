@@ -6,7 +6,7 @@ import { Notifications } from 'react-native-notifications';
 import RNPusherPushNotifications from 'react-native-pusher-push-notifications';
 
 
-const id = "2b9765ab-2493-4635-917e-cc0f0ead3bfc"
+const id = "ba8515ce-4660-4b11-a8bc-e66a85f84dca"
 const donutsInterest = 'debug-a';
 export default async function GetNotif () {
   const user = await AsyncStorage.getItem('user')

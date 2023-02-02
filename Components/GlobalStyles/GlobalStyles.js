@@ -24,7 +24,8 @@ import Colors from './Color';
       borderRadius:8,
       shadowColor:Colors.BgColorII,
       elevation:4,
-      shadowRadius:20
+      shadowRadius:20,
+      alignSelf:"center"
     },
 
     HeaderWrapper:{
@@ -73,12 +74,12 @@ import Colors from './Color';
     Button:{
       width:170,
       height:40,
-      borderRadius:8,
+      borderRadius:40,
       // borderRadius:10,
       marginTop:20,
       alignItems:"center",
     justifyContent:'center'},
-    BtnText:{color:Colors.BgColor,fontWeight:'bold',fontSize:20,
+    BtnText:{color:Colors.FontColorI,fontWeight:'bold',fontSize:20,
   },
     BtnShadow:{elevation:4,shadowColor:Colors.PrimaryColor},
 
@@ -88,7 +89,7 @@ import Colors from './Color';
       width:WindowWidth/1.1,
       height:WindowHeight/1.5,
       borderRadius:20,
-      backgroundColor:Colors.bgIII,
+      backgroundColor:Colors.bgIv,
       alignSelf:'center',
       alignItems:'center'
   },
@@ -106,7 +107,7 @@ import Colors from './Color';
 },
 IconWrapper:{
 
-  backgroundColor:Colors.PrimaryColor,
+  backgroundColor:Colors.BgColorII,
   width:35,
   height:35,
   borderRadius:5,

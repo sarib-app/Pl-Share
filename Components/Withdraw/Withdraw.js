@@ -31,22 +31,24 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import moment from 'moment';
 import Filter from '../Recharge/Filter';
 import BackBtn from '../GlobalStyles/BackButton';
+import debited from '../../assets/icons/debited.png'
+import { useIsFocused } from '@react-navigation/native';
 function Withdraw() {
   const asyncdata = getAsync()
 const [Withdraw,setWithdraw]=useState([])
 const navigation = useNavigation()
 const [selected , setSelected]=useState(1)
-
+const Focused = useIsFocused()
 const [showFilter,setShowFilter]=useState(false)
 
-const [loading,setloading]=useState(false)
+const [loading,setloading]=useState(true)
 const [ErrorMessage,setErrorMessage] = useState("You currently have not withdraws")
 const [totalWithdraw,setTotalWithdraw]=useState(0)
 
 const [value,setValue]=useState("approved")
 
 
-const withdrawData = Withdraw.filter((item)=> item.status === value )
+const withdrawData = Withdraw
 
 
 function onChangeValue(Val){
@@ -63,12 +65,16 @@ function Navigation(item){
 }
 
   const RenderDeposit=({item})=>(
-    <Pressable 
+<Pressable 
      onPress={()=> Navigation(item)}
      style={{shadowColor:'red', elevation:2}}>
-    <Image source={item.Image}
-    style={{width:134,height:90,marginRight:10,}}
+<View style={GlobalStyles.DullBtn}>
+<Image source={item.Image}
+    style={{width:item.width,height:item.height,marginRight:10,tintColor:Colors.PrimaryColor}}
     />
+</View>
+
+    
     </Pressable>
     )
     
@@ -102,7 +108,7 @@ async function getAsyncData () {
 
 useEffect(()=>{
   getAsyncData()
-  },[])
+  },[Focused])
 
 
 
@@ -115,7 +121,7 @@ function onHideModal(){
 
 
 function fetchWithdraws(id){
-  setloading(true)
+  // setloading(true)
 
   var formdata = new FormData();
   formdata.append("user_id", id);
@@ -139,7 +145,7 @@ function fetchWithdraws(id){
       setloading(false)
       setErrorMessage("Something went wrong try again later!")
 
-      console.log('error', error)});
+      console.log('error in withdraw', error)});
 
   }
 
@@ -154,15 +160,10 @@ function LowerCart(){
 
 
   function HistoryWrapperList({item}){
-    const PaymentIcon = item.Acc_Type === "EasyPaisa" ? easypaissmall : 
-    item.Acc_Type === "Jazzcash" ? JazzCashSmall: 
-    item.Acc_Type === "Binance" ? BinanceSmall :
-    item.Acc_Type === "VISA" ? VisaSmall:
-    item.Acc_Type === "OKX" ? OkxSmall:easypaissmall
-
-const imgStyle={width:
-item.Acc_Type === "VISA"?32:item.Acc_Type === "OKX" ?32:27,
-height:item.Acc_Type === "VISA"?19:item.Acc_Type === "OKX" ?8:27,
+    const PaymentIcon = debited
+const imgStyle={width:21,
+  height:21,
+  
 
 
 }
@@ -183,8 +184,8 @@ height:item.Acc_Type === "VISA"?19:item.Acc_Type === "OKX" ?8:27,
     
     <Text style={GlobalStyles.TitleText}>Withdraw Via {item.Acc_Type}</Text>
     <Text style={[GlobalStyles.ScndTxt,{color:item.status !="approved" ?Colors.danger:Colors.send}]}>Status: {item.status}</Text>
-    <Text style={[GlobalStyles.ScndTxt,{color:Colors.FontColorI,textDecorationLine:'line-through'}]}>Actual Price: {(100*item.requested_amount)/95}</Text>
-    <Text style={[GlobalStyles.ScndTxt,{color:Colors.danger}]}>Tax: 5%</Text>
+    <Text style={[GlobalStyles.ScndTxt,{color:Colors.FontColorI,textDecorationLine:'line-through'}]}>Actual Price: {(100*item.requested_amount)/97}</Text>
+    <Text style={[GlobalStyles.ScndTxt,{color:Colors.danger}]}>Tax: 3%</Text>
 
 
     <Text style={GlobalStyles.ScndTxt}>{ moment(item.created_at).format("YYYY-MM-DD")}</Text>
@@ -213,7 +214,7 @@ height:item.Acc_Type === "VISA"?19:item.Acc_Type === "OKX" ?8:27,
 { withdrawData.length <1? 
   <Text style={{color:Colors.FontColorI,marginTop:100}}>{ErrorMessage}</Text>
   :
-  withdrawData.map((item)=>{
+  withdrawData.sort((a,b)=> b.id-a.id).map((item)=>{
       return(
         <HistoryWrapperList item={item}/>
       )
@@ -231,7 +232,7 @@ height:item.Acc_Type === "VISA"?19:item.Acc_Type === "OKX" ?8:27,
         <View style={styles.LowerCart}>
     <View style={styles.InnerlowCart}>
 <Text style={styles.TxtClr}>Activity</Text>
-<Pressable 
+{/* <Pressable 
 onPress={()=> setShowFilter(true)}
 style={styles.FilterWrap}>
 
@@ -239,7 +240,7 @@ style={styles.FilterWrap}>
 <Image source={filterIcon}
 style={{width:13,height:13}}
 />
-</Pressable>
+</Pressable> */}
     </View>
    
 <Text style={[styles.TxtClr,{margin:15}]}>Recent Withdrawls</Text>
@@ -290,8 +291,8 @@ loading === false ?
 nestedScrollEnabled={true}
 >
 
-<Text style={{color:Colors.placeHolder,marginLeft:15}}>Income</Text>
-<Text style={[styles.Text,{marginTop:5}]}>PKR {totalWithdraw}</Text>
+<Text style={{color:Colors.placeHolder,marginLeft:15}}>Total</Text>
+<Text style={[styles.Text,{marginTop:5}]}>USD {totalWithdraw}</Text>
 <Text style={{color:Colors.PrimaryColor,fontWeight:'600',marginLeft:15,marginTop:-10}}>Withdraw Via</Text>
 
 <DepositMethodd />

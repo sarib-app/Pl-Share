@@ -1,2 +1,2 @@
-const BaseUrl = "https://apis.tradingtube.net/api/"
+const BaseUrl = "https://apis.powerlevelshare.com/api/"
 export default BaseUrl

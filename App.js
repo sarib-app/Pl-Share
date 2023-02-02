@@ -43,7 +43,7 @@ const App = () => {
   const [loggedin,setLoggedIn]=useState(true)
 
   useEffect(() => {
-    // SplashScreen.hide(); //hides the splash screen on app load.
+    SplashScreen.hide(); //hides the splash screen on app load.
     getAsyncData()
     
   //   Notifications.postLocalNotification({

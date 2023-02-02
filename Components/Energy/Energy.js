@@ -20,11 +20,12 @@ import Colors from '../GlobalStyles/Color';
 
 import credited from '../../assets/icons/credited.png'
 import debited from '../../assets/icons/debited.png'
+import all from '../../assets/icons/all.png'
 
 import LinearGradient from 'react-native-linear-gradient';
 import GlobalStyles from '../GlobalStyles/GlobalStyles';
 import {DepositTransaction,TeamsComission,DailyIncomeData} from '../data/TopInvestors';
-import DailyIncome from '../../assets/icons/DailyIncome.png'
+import DailyIncome from '../../assets/icons/withdrawII.png'
 import TeamComission from '../../assets/icons/TeamComission.png'
 import BaseUrl from '../../Urls';
 import Endpoints from '../../EnDPoints';
@@ -32,6 +33,7 @@ import moment from 'moment';
 import GlobalProgressLoader from '../LoadingModal/LoadingModal';
 import getAsync from '../GetAsynData/getAsync';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 // import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
 
 // const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-7224745157985009/9676971080';
@@ -40,7 +42,8 @@ function EnergyScreen({
   forceReload,
   currentDate,
   total_Record,
-  allComissions
+  allComissions,
+  DirectBonusList
 
 }) {
   const [user,setUser]=useState({
@@ -67,7 +70,7 @@ const end = {x: 0, y: 0}
 
 
 // const LowerCardTitle = selected === "Income"?"Daily Income":"Team's Comission"
-const LowerCardTitle = selected === "Income"?"Daily Income":"Team's Comission"
+const LowerCardTitle = selected === "Income"?"Daily Income":selected==="Bonus"?"Direct Bonus":"Network Bonus"
 
 
 
@@ -125,7 +128,7 @@ const totalIncome = Number(total_Record !=""? total_Record.Total_income:0)
 
 <View style={styles.UpperCart}>
 <Text style={styles.balanceTitle}>Total {"Income"}</Text>
-<Text style={styles.BalanceTxt}>PKR {totalIncome.toFixed(2)}</Text>
+<Text style={styles.BalanceTxt}>USD {totalIncome}</Text>
 
 <View style={styles.LvlContainer}>
 <Text style={styles.LvlTxt}>Level <Text style={styles.LvlinnerTxt}>{total_Record !=""? total_Record.my_level:0}</Text></Text>
@@ -133,7 +136,7 @@ const totalIncome = Number(total_Record !=""? total_Record.Total_income:0)
 
 
 <View 
-style={styles.catSection}>
+style={[styles.catSection,{ justifyContent:'space-evenly'}]}>
 <Pressable
 onPress={()=> setSelected("Income")}
 style={{alignItems:'center'}}
@@ -146,7 +149,7 @@ style={styles.iconWrapper}>
 
 
 <Image
-style={{width:42,height:42,tintColor:selected === "Income"?Colors.BgColor:Colors.FontColorI}}
+style={{width:46,height:46,tintColor:selected === "Income"?Colors.BgColor:Colors.FontColorI}}
 source={DailyIncome}
 />
 
@@ -171,7 +174,7 @@ style={styles.iconWrapper}>
 
 
 <Image
-style={{width:41,height:46,tintColor:selected === "Comission"?Colors.BgColor:Colors.FontColorI}}
+style={{width:44,height:44,tintColor:selected === "Comission"?Colors.BgColor:Colors.FontColorI}}
 source={TeamComission}
 />
 
@@ -179,7 +182,34 @@ source={TeamComission}
 </LinearGradient>
 
 <Text style={{color:Colors.FontColorI}}>
-Team Comission
+Network Bonus
+</Text>
+
+</Pressable>
+
+<Pressable
+onPress={()=> setSelected("Bonus")}
+style={{alignItems:'center'}}
+
+>
+
+
+<LinearGradient 
+ colors={[ selected === "Bonus"?  Colors.PrimaryColor:Colors.bgIv, selected === "Bonus"?Colors.SeconderyColor:Colors.bgIv]}
+ start={start} end={end}     
+style={styles.iconWrapper}>
+
+
+<Image
+style={{width:44,height:44,tintColor:selected === "Bonus"?Colors.BgColor:Colors.FontColorI}}
+source={all}
+/>
+
+
+</LinearGradient>
+
+<Text style={{color:Colors.FontColorI}}>
+Direct Bonus
 </Text>
 
 </Pressable>
@@ -201,7 +231,7 @@ Team Comission
 
 
 function LowerCart(){
-  const data = selected=== "Income"? DailyIncomes:allComissions
+  const data = selected=== "Income"? DailyIncomes: selected === "Bonus"?DirectBonusList: allComissions 
 
 
 
@@ -248,8 +278,8 @@ function LowerCart(){
   
 
     <>
-    <Text style={{color:Colors.FontColorI}}>Chain Name: {item.username}</Text>
-    <Text style={{color:Colors.FontColorI}}>Chain Id: {item.commission_from}</Text>
+    <Text style={{color:Colors.FontColorI}}>Mem Name: {item.username}</Text>
+    <Text style={{color:Colors.FontColorI}}>Mem Id: {item.commission_from}</Text>
     </>
 
 
@@ -261,7 +291,7 @@ function LowerCart(){
   </View>
   
   <View style={{alignItems:"center"}}>
-  <Text style={[styles.TransactionText,{color:amountClr}]}>{operator}{item.commission} PKR{'\n'}</Text>
+  <Text style={[styles.TransactionText,{color:amountClr}]}>{operator}{item.commission} USD{'\n'}</Text>
 
 
 
@@ -280,7 +310,71 @@ function LowerCart(){
 
 
 
+  const DirectBonus =({item})=>{
 
+
+
+
+
+
+
+    const amountClr= Colors.send
+    const transIcon = debited
+    const operator = "+"
+  
+      const [isOpen ,setIsOpen]=useState(false)
+    
+    return(
+      <View style={styles.TrickContainer}>
+    
+    
+    <View style={{flexDirection:'row',alignItems:"center",justifyContent:"space-around"}}>
+    <View style={styles.IconWrapper}>
+    
+    <Image 
+    style={{width:22,height:22,tintColor:amountClr}} 
+    source={transIcon}
+    />
+    
+    
+    </View>
+    
+    
+    
+    <View style={styles.InnerTricks}>
+    <Text style={{fontWeight:'bold',fontSize:18,color:Colors.FontColorI}}>Bonus</Text>
+    
+  
+      <>
+      <Text style={{color:Colors.FontColorI}}>Member Name: {item.username}</Text>
+      <Text style={{color:Colors.FontColorI}}>Member Code: {item.commission_from}</Text>
+      <Text style={{color:Colors.send}}>Amount: {item.commission}</Text>
+
+      </>
+  
+  
+  
+  
+    </View>
+    
+    
+    </View>
+    
+    <View style={{alignItems:"center"}}>
+    <Text style={[styles.TransactionText,{color:amountClr}]}>{operator}{item.commission} USD{'\n'}</Text>
+  
+  
+  
+    </View>
+  
+  
+    
+    </View>
+    
+    
+    )
+    }
+  
 
 
 
@@ -376,13 +470,13 @@ setshowProgressLoader(true)
 <View style={styles.SingleII}>
 
 <Text style={styles.SingleIncomeText}>
-  Package Id: {item.package_id}
+ Id: {item.id}
 </Text>
 
 
 
 
-<Text style={styles.SingleIncomeText}>
+{/* <Text style={styles.SingleIncomeText}>
   Package Start Date: {item.start_date}
 </Text>
 <Text style={styles.SingleIncomeText}>
@@ -391,8 +485,10 @@ setshowProgressLoader(true)
 
 <Text style={styles.SingleIncomeText}>
   Esitmated Earning: {item.cycle_earning}
+</Text> */}
+<Text style={styles.SingleIncomeText}>
+  Recieved At: {item.created_at}
 </Text>
-
 
 {/* {refreshing === true ?
 
@@ -480,8 +576,10 @@ data.length < 1?
 data.map((item)=>{
   return(<>
   {
-    selected === "Income"? <DailyIncomeSingle item={item}/>:
+    selected === "Income"? <DailyIncomeSingle item={item}/>:selected==="Bonus"?
+    <DirectBonus item={item} />
 
+:
     <TransactionList item={item} />
   }
 
